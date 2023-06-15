@@ -1,2 +1,3 @@
 # hawaii
-Sample Azure DevOps Pipeline that deploys infrastructure to Azure, using CAF Landing Zones, and test the deployment using BenchPress
+
+Sample Azure DevOps Pipeline that deploys infrastructure to Azure using bicep, and test the deployment using BenchPress
