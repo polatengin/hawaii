@@ -1,4 +1,4 @@
-using './aksCluster.bicep'
+using './main.bicep'
 
 param aksName = 'aks-test'
 param location = 'westus'

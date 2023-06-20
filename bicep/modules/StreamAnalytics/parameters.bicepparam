@@ -1,4 +1,4 @@
-using './streamAnalytics.bicep'
+using './main.bicep'
 
 param location = 'westus'
 param name = 'clstr-test'
@@ -8,4 +8,3 @@ param streamAnalyticsInputName = 'testinput'
 param streamAnalyticsOutputName = 'testoutput'
 param streamAnalyticsTransformationName = 'testtransformation'
 param numberOfStreamingUnits = 1
-

@@ -1,4 +1,4 @@
-using './cosmosDB.bicep'
+using './main.bicep'
 
 param gremlinAccountName = 'gremlin-test'
 param gremlinDatabaseName = 'gremlin-db-name'
@@ -15,4 +15,3 @@ param dataActions = [
 ]
 param svcPrincipalObjectId = ''
 param roleDefinitionName = 'My Read Write Role'
-

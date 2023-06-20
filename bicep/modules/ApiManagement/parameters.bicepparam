@@ -1,4 +1,4 @@
-using './ApiManagement.bicep'
+using './main.bicep'
 
 param serviceName = 'apim-test'
 param location = 'westus'

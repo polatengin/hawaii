@@ -1,6 +1,5 @@
-using './dashboard.bicep'
+using './main.bicep'
 
 param dashboardName = 'dash-test'
 param dashboardDisplayName = 'Sample Dashboard'
 param location = 'westus'
-

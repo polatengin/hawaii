@@ -1,4 +1,4 @@
-using './virtualMachine.bicep'
+using './main.bicep'
 
 param vmName = 'vm-test'
 param adminUsername = 'adminUserName'

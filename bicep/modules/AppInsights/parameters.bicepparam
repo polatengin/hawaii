@@ -1,4 +1,4 @@
-using './appInsights.bicep'
+using './main.bicep'
 
 param appInsightsName = 'appinsights-test'
 param workspaceName = 'logworkspace-test'

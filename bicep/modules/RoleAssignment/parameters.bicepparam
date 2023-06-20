@@ -1,4 +1,3 @@
-using './roleAssignment.bicep'
+using './main.bicep'
 
 param svcPrincipalObjectId = ''
-

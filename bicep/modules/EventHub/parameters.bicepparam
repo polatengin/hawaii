@@ -1,7 +1,6 @@
-using './eventHub.bicep'
+using './main.bicep'
 
 param name = 'evnthb-test'
 param eventHubNamespaceName = 'evnthbnmspace-test'
 param consumerGroupName = 'evntconsumer-test'
 param location = 'westus'
-
