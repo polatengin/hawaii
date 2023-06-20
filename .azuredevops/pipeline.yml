@@ -1,19 +1,29 @@
 trigger: none
 
-pool:
-  vmImage: ubuntu-latest
+pool: default
 
 parameters:
-  serviceConnectionName: "sc_arm"
-  location: "westus"
-  subscriptionId: ""
-  resourceGroupName: "rg-enpolat-$(Build.BuildNumber)"
-  runNumber: $(Build.BuildNumber)
+  - name: serviceConnectionName
+    default: "sc_arm"
+
+  - name: location
+    default: "westus"
+
+  - name: subscriptionId
+
+  - name: resourceGroupName
+    default: "rg-enpolat-$(Build.BuildNumber)"
+
+  - name: runNumber
+    default: $(Build.BuildNumber)
 
 jobs:
+
 - job:
   displayName: 'Deploy'
+
   steps:
+
   - task: AzureCLI@2
     displayName: Az CLI Deploy Resource Group
     name: deploy_resource_group
