@@ -14,7 +14,7 @@ parameters:
   - name: runNumber
     default: $(Build.BuildNumber)
 
-variable:
+variables:
   - name: serviceConnectionName
     value: "sc_arm"
 
