@@ -34,4 +34,4 @@ jobs:
         az account show
         az bicep install
         az bicep upgrade
-        az bicep --version
+        az bicep version
