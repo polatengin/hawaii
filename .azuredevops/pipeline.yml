@@ -2,19 +2,18 @@ trigger: none
 
 pool: "Azure Pipelines"
 
-parameters:
-  - name: location
-    default: "westus"
-
-  - name: resourceGroupName
-    default: "rg-enpolat-$(Build.BuildNumber)"
-
-  - name: runNumber
-    default: $(Build.BuildNumber)
-
 variables:
   - name: serviceConnectionName
     value: "sc_arm"
+
+  - name: location
+    value: "westus"
+
+  - name: resourceGroupName
+    value: "rg-enpolat-$(Build.BuildNumber)"
+
+  - name: runNumber
+    value: $(Build.BuildNumber)
 
 jobs:
 
@@ -32,6 +31,8 @@ jobs:
       inlineScript: |
         az bicep install
         az bicep upgrade
+        write-Host resourceGroupName: $(resourceGroupName)
+        write-Host runNumber: $(runNumber)
 
   - task: AzureCLI@2
     displayName: Az CLI Deploy Resource Group
