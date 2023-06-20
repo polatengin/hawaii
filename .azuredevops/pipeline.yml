@@ -42,10 +42,10 @@ jobs:
       inlineScript: |
         foreach ($module in Get-ChildItem -Path "./bicep/modules" -Directory) {
           $modulePath = $module.FullName
-          Write-Host "Processing module: $($module.Name)"
+          Write-Host "Processing module: ${modulePath}"
 
           # Example: az bicep build and deploy commands
-          az bicep build --file "$modulePath/main.bicep" --outdir "$modulePath/out"
+          az bicep build --file "$modulePath/main.bicep" --outdir "$modulePath"
 
           # az deployment group create --resource-group MyResourceGroup --template-file "$modulePath/out/main.json" --parameters "$modulePath/out/main.parameters.json"
         }
