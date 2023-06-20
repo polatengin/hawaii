@@ -31,7 +31,6 @@ jobs:
       scriptType: 'bash'
       scriptLocation: 'inlineScript'
       inlineScript: |
-        az account show
         az bicep install
         az bicep upgrade
-        az bicep version
+        az account show
