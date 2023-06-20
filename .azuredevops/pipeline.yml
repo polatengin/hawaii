@@ -32,5 +32,6 @@ jobs:
       scriptLocation: 'inlineScript'
       inlineScript: |
         az account show
-        ls -lah
-        ls -lah ./bicep/modules
+        az bicep install
+        az bicep upgrade
+        az bicep --version
