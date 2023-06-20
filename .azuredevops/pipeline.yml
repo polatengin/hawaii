@@ -3,9 +3,6 @@ trigger: none
 pool: default
 
 parameters:
-  - name: serviceConnectionName
-    default: "sc_arm"
-
   - name: location
     default: "westus"
 
@@ -16,6 +13,10 @@ parameters:
 
   - name: runNumber
     default: $(Build.BuildNumber)
+
+variable:
+  - name: serviceConnectionName
+    value: "sc_arm"
 
 jobs:
 
