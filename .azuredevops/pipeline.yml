@@ -18,16 +18,16 @@ variables:
 jobs:
 
 - job:
-  displayName: 'Deploy and Test Bicep Modules'
+  displayName: "Deploy and Test Bicep Modules"
 
   steps:
 
   - task: AzureCLI@2
-    displayName: Setup
+    displayName: "Setup"
     inputs:
       azureSubscription: $(serviceConnectionName)
-      scriptType: 'pscore'
-      scriptLocation: 'inlineScript'
+      scriptType: "pscore"
+      scriptLocation: "inlineScript"
       inlineScript: |
         az bicep install
         az bicep upgrade
@@ -35,11 +35,11 @@ jobs:
         write-Host runNumber: $(runNumber)
 
   - task: AzureCLI@2
-    displayName: Az CLI Deploy Resource Group
+    displayName: "Deploy Resource Group"
     inputs:
       azureSubscription: $(serviceConnectionName)
-      scriptType: 'pscore'
-      scriptLocation: 'inlineScript'
+      scriptType: "pscore"
+      scriptLocation: "inlineScript"
       inlineScript: |
         foreach ($module in Get-ChildItem -Path "./bicep/modules" -Directory) {
           $modulePath = $module.FullName
