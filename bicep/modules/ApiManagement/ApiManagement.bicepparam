@@ -1,0 +1,10 @@
+using './ApiManagement.bicep'
+
+param serviceName = 'apim-test'
+param location = 'westus'
+param apiName = 'api-test'
+param workspaceName = 'logworkspace-test'
+param appInsightsName = 'appinsights-test'
+param loggerName = 'log-test'
+param diagnosticName = 'applicationinsights'
+param policyName = 'policy'
