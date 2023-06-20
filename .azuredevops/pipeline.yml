@@ -10,10 +10,7 @@ variables:
     value: "westus"
 
   - name: resourceGroupName
-    value: "rg-enpolat-$(Build.BuildNumber)"
-
-  - name: runNumber
-    value: $(Build.BuildNumber)
+    value: "rg-enpolat-$(Build.BuildId)"
 
 jobs:
 
@@ -32,7 +29,6 @@ jobs:
         az bicep install
         az bicep upgrade
         write-Host resourceGroupName: $(resourceGroupName)
-        write-Host runNumber: $(runNumber)
 
   - task: AzureCLI@2
     displayName: "Deploy Resource Group"
