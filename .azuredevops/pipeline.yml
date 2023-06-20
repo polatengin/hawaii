@@ -18,7 +18,7 @@ variables:
 jobs:
 
 - job:
-  displayName: 'Deploy'
+  displayName: 'Deploy and Test Bicep Modules'
 
   steps:
 
