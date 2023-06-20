@@ -6,8 +6,6 @@ parameters:
   - name: location
     default: "westus"
 
-  - name: subscriptionId
-
   - name: resourceGroupName
     default: "rg-enpolat-$(Build.BuildNumber)"
 
@@ -33,5 +31,4 @@ jobs:
       scriptType: 'bash'
       scriptLocation: 'inlineScript'
       inlineScript: |
-        az account set --subscription $(subscriptionId)
         az account show
