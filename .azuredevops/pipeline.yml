@@ -65,8 +65,11 @@ jobs:
       azureSubscription: $(serviceConnectionName)
       scriptType: "pscore"
       scriptLocation: "inlineScript"
+      workingDirectory: '$(Build.SourcesDirectory)/bicep/tests'
       inlineScript: |
         Write-Host "BuildId: $(buildId)"
         Write-Host "BenchPress: $(BenchPress)"
         Write-Host "AZ_APPLICATION_ID 0: $(AZ_APPLICATION_ID)"
         Write-Host "AZ_APPLICATION_ID 1: $(BenchPress.AZ_APPLICATION_ID)"
+
+        Invoke-Pester -OutputFile test.xml -OutputFormat NUnitXML
