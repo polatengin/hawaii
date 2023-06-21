@@ -28,7 +28,6 @@ jobs:
       inlineScript: |
         az bicep install
         az bicep upgrade
-        write-Host resourceGroupName: $(resourceGroupName)
 
   - task: AzureCLI@2
     displayName: "Deploy Resource Group"
