@@ -3,6 +3,8 @@ trigger: none
 pool: "Azure Pipelines"
 
 variables:
+  - group: "BenchPress"
+
   - name: serviceConnectionName
     value: "sc_arm"
 
@@ -54,3 +56,17 @@ jobs:
           az deployment group create --resource-group $(resourceGroupName) --template-file "$modulePath/main.bicep" --parameters "$modulePath/parameters.bicepparam" --output none
           Write-Host "Module deployed: ${modulePath}"
         }
+
+  - task: AzureCLI@2
+    displayName: "Run e2e tests"
+    env:
+      buildId: $(buildId)
+    inputs:
+      azureSubscription: $(serviceConnectionName)
+      scriptType: "pscore"
+      scriptLocation: "inlineScript"
+      inlineScript: |
+        Write-Host "BuildId: $(buildId)"
+        Write-Host "BenchPress: $(BenchPress)"
+        Write-Host "AZ_APPLICATION_ID 0: $(AZ_APPLICATION_ID)"
+        Write-Host "AZ_APPLICATION_ID 1: $(BenchPress.AZ_APPLICATION_ID)"
