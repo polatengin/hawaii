@@ -1,6 +1,6 @@
 using './main.bicep'
 
-param location = 'westus'
-param serverName = 'sqlsvr-test'
-param databaseName = 'sqldb-test'
+param serverName = 'sqlsvr-test-${readEnvironmentVariable('buildId', '001')}'
+param databaseName = 'sqldb-test-${readEnvironmentVariable('buildId', '001')}'
 param adminPassword = ''
+param location = 'westus'

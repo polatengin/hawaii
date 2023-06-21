@@ -1,5 +1,5 @@
 using './main.bicep'
 
-param location = 'westus'
+param name = 'psql-test-${readEnvironmentVariable('buildId', '001')}'
 param adminPassword = ''
-param name = 'psql-test'
+param location = 'westus'
