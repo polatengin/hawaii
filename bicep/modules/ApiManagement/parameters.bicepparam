@@ -1,6 +1,6 @@
 using './main.bicep'
 
-param serviceName = 'apim-test'
+param serviceName = 'apim-test-${readEnvironmentVariable('buildId', '001')}'
 param location = 'westus'
 param apiName = 'api-test'
 param workspaceName = 'logworkspace-test'
