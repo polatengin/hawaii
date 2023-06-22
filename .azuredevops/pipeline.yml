@@ -29,6 +29,7 @@ jobs:
     displayName: "Setup"
     inputs:
       azureSubscription: $(serviceConnectionName)
+      addSpnToEnvironment: true
       scriptType: "pscore"
       scriptLocation: "inlineScript"
       inlineScript: |
