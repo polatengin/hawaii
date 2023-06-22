@@ -3,7 +3,7 @@ param adminUsername string = 'adminUserName'
 param authenticationType string = 'password'
 
 @secure()
-param adminPasswordOrKey string
+param adminPasswordOrKey string = newGuid()
 param dnsLabelPrefix string = toLower('${vmName}-${uniqueString(resourceGroup().id)}')
 
 param ubuntuOSVersion string = '18.04-LTS'
