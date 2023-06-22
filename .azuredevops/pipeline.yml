@@ -47,11 +47,10 @@ jobs:
       inlineScript: |
         Write-Host "BuildId: $(buildId)"
         Write-Host "Creating resource group: $(resourceGroupName)"
-        Write-Host "BenchPress: $(BenchPress)"
-        Write-Host "AZ_APPLICATION_ID 0: $(AZ_APPLICATION_ID)"
-        Write-Host "AZ_APPLICATION_ID 1: $(BenchPress.AZ_APPLICATION_ID)"
+        Write-Host "AZ_APPLICATION_ID: $(AZ_APPLICATION_ID)"
         Write-Host "AZ_SP_APP_ID: $(AZ_SP_APP_ID)"
         Write-Host "AZ_SP_HAWAII: $(AZ_SP_HAWAII)"
+        Write-Host "BenchPress: $(BenchPress)"
 
   - task: AzureCLI@2
     displayName: "Deploy Resource Group"
