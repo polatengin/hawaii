@@ -1,3 +1,3 @@
 using './main.bicep'
 
-param svcPrincipalObjectId = ''
+param svcPrincipalObjectId = readEnvironmentVariable('AZ_SP_APP_ID', '')

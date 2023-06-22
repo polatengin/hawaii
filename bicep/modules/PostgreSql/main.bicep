@@ -1,6 +1,8 @@
 param location string = resourceGroup().location
+
 @secure()
-param adminPassword string
+param adminPassword string = newGuid()
+
 param name string = 'psql${take(uniqueString(subscription().id), 5)}'
 
 resource symbolicname 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' = {
