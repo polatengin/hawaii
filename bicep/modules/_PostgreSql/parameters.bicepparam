@@ -1,4 +1,4 @@
 using './main.bicep'
 
-param name = 'psql-test-${readEnvironmentVariable('buildId', '001')}'
+param name = 'psql-hawaii-${readEnvironmentVariable('buildId', '001')}'
 param location = 'westus'

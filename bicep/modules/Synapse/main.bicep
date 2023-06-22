@@ -98,7 +98,7 @@ resource synapse_spark_sql_pool 'Microsoft.Synapse/workspaces/bigDataPools@2021-
     sparkVersion: '2.4'
   }
 }
-
+/*
 resource roleAssignmentStg 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(resourceGroup().id, resourceId('Microsoft.Storage/storageAccounts', storageAccount.name), synapseName)
   properties: {
@@ -108,3 +108,4 @@ resource roleAssignmentStg 'Microsoft.Authorization/roleAssignments@2022-04-01' 
   }
   scope: storageAccount
 }
+*/

@@ -1,4 +1,4 @@
 using './main.bicep'
 
-param name = 'asp-test-${readEnvironmentVariable('buildId', '001')}'
+param name = 'asp-hawaii-${readEnvironmentVariable('buildId', '001')}'
 param location = 'westus'

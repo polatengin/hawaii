@@ -1,10 +1,10 @@
 using './main.bicep'
 
-param gremlinAccountName = 'gremlin-test-${readEnvironmentVariable('buildId', '001')}'
+param gremlinAccountName = 'gremlin-hawaii-${readEnvironmentVariable('buildId', '001')}'
 param gremlinDatabaseName = 'gremlin-db-name-${readEnvironmentVariable('buildId', '001')}'
-param mongoAccountName = 'mongo-test-${readEnvironmentVariable('buildId', '001')}'
+param mongoAccountName = 'mongo-hawaii-${readEnvironmentVariable('buildId', '001')}'
 param mongoDBDatabaseName = 'mongodb-db-name-${readEnvironmentVariable('buildId', '001')}'
-param sqlAccountName = 'sql-test-${readEnvironmentVariable('buildId', '001')}'
+param sqlAccountName = 'sql-hawaii-${readEnvironmentVariable('buildId', '001')}'
 param sqlDatabaseName = 'sql-db-name-${readEnvironmentVariable('buildId', '001')}'
 param location = 'westus'
 param primaryRegion = 'eastus'

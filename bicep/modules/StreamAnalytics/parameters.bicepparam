@@ -1,10 +1,10 @@
 using './main.bicep'
 
-param name = 'clstr-test-${readEnvironmentVariable('buildId', '001')}'
-param streamAnalyticsJobName = 'testjob-${readEnvironmentVariable('buildId', '001')}'
-param streamAnalyticsFunctionName = 'testfunction'
-param streamAnalyticsInputName = 'testinput'
-param streamAnalyticsOutputName = 'testoutput'
-param streamAnalyticsTransformationName = 'testtransformation'
+param name = 'clstr-hawaii-${readEnvironmentVariable('buildId', '001')}'
+param streamAnalyticsJobName = 'hawaiijob-${readEnvironmentVariable('buildId', '001')}'
+param streamAnalyticsFunctionName = 'hawaiifunction'
+param streamAnalyticsInputName = 'hawaiiinput'
+param streamAnalyticsOutputName = 'hawaiioutput'
+param streamAnalyticsTransformationName = 'hawaiitransformation'
 param numberOfStreamingUnits = 1
 param location = 'westus'

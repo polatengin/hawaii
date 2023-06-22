@@ -15,7 +15,7 @@ variables:
     value: "$(Build.BuildId)"
 
   - name: resourceGroupName
-    value: "rg-enpolat-$(Build.BuildId)"
+    value: "rg-hawaii-$(Build.BuildId)"
 
 jobs:
 

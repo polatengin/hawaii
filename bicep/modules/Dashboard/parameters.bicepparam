@@ -1,5 +1,5 @@
 using './main.bicep'
 
-param dashboardName = 'dash-test-${readEnvironmentVariable('buildId', '001')}'
+param dashboardName = 'dash-hawaii-${readEnvironmentVariable('buildId', '001')}'
 param dashboardDisplayName = 'Sample Dashboard'
 param location = 'westus'

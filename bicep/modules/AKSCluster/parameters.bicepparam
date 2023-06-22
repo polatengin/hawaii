@@ -1,5 +1,5 @@
 using './main.bicep'
 
-param aksName = 'aks-test-${readEnvironmentVariable('buildId', '001')}'
+param aksName = 'aks-hawaii-${readEnvironmentVariable('buildId', '001')}'
 param location = 'westus'
-param agentPoolName = 'aptest'
+param agentPoolName = 'aphawaii'

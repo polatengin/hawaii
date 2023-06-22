@@ -1,5 +1,5 @@
 using './main.bicep'
 
-param serverName = 'sqlsvr-test-${readEnvironmentVariable('buildId', '001')}'
-param databaseName = 'sqldb-test-${readEnvironmentVariable('buildId', '001')}'
+param serverName = 'sqlsvr-hawaii-${readEnvironmentVariable('buildId', '001')}'
+param databaseName = 'sqldb-hawaii-${readEnvironmentVariable('buildId', '001')}'
 param location = 'westus'

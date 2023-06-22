@@ -1,6 +1,6 @@
 using './main.bicep'
 
-param dataFactoryName = 'adf-test-${readEnvironmentVariable('buildId', '001')}'
-param storageAccountName = 'stgtest${readEnvironmentVariable('buildId', '001')}'
-param blobContainerName = 'blob-test-${readEnvironmentVariable('buildId', '001')}'
+param dataFactoryName = 'adf-hawaii-${readEnvironmentVariable('buildId', '001')}'
+param storageAccountName = 'stghawaii${readEnvironmentVariable('buildId', '001')}'
+param blobContainerName = 'blob-hawaii-${readEnvironmentVariable('buildId', '001')}'
 param location = 'westus'

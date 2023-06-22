@@ -1,4 +1,4 @@
 using './main.bicep'
 
-param actionGroupName = 'ag-test-${readEnvironmentVariable('buildId', '001')}'
+param actionGroupName = 'ag-hawaii-${readEnvironmentVariable('buildId', '001')}'
 param location = 'global'

@@ -1,6 +1,6 @@
 using './main.bicep'
 
-param vmName = 'vm-test-${readEnvironmentVariable('buildId', '001')}'
+param vmName = 'vm-hawaii-${readEnvironmentVariable('buildId', '001')}'
 param adminUsername = 'adminUserName'
 param authenticationType = 'password'
 param dnsLabelPrefix = 'dns-label-prefix-${readEnvironmentVariable('buildId', '001')}'
