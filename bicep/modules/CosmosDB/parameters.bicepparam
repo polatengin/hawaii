@@ -13,5 +13,5 @@ param dataActions = [
   'Microsoft.DocumentDB/databaseAccounts/readMetadata'
   'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/*'
 ]
-param svcPrincipalObjectId = readEnvironmentVariable('AZ_SP_APP_ID', '')
-param roleDefinitionName = 'My Read Write Role'
+param svcPrincipalObjectId = readEnvironmentVariable('AZ_SP_HAWAII_ID', '')
+param roleDefinitionName = 'cosmos-read-role-${readEnvironmentVariable('buildId', '001')}'
