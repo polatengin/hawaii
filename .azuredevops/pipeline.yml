@@ -36,28 +36,12 @@ jobs:
         az bicep upgrade
 
   - task: AzureCLI@2
-    displayName: "Troubleshooting"
-    env:
-      buildId: $(buildId)
-      AZ_SP_HAWAII: $(AZ_SP_HAWAII)
-    inputs:
-      azureSubscription: $(serviceConnectionName)
-      scriptType: "pscore"
-      scriptLocation: "inlineScript"
-      inlineScript: |
-        Write-Host "BuildId: $(buildId)"
-        Write-Host "Creating resource group: $(resourceGroupName)"
-        Write-Host "AZ_APPLICATION_ID: $(AZ_APPLICATION_ID)"
-        Write-Host "AZ_SP_APP_ID: $(AZ_SP_APP_ID)"
-        Write-Host "AZ_SP_HAWAII: $(AZ_SP_HAWAII)"
-        Write-Host "BenchPress: $(BenchPress)"
-
-  - task: AzureCLI@2
     displayName: "Deploy Resource Group"
     env:
       buildId: $(buildId)
     inputs:
       azureSubscription: $(serviceConnectionName)
+      addSpnToEnvironment: true
       scriptType: "pscore"
       scriptLocation: "inlineScript"
       inlineScript: |
@@ -81,6 +65,7 @@ jobs:
       buildId: $(buildId)
     inputs:
       azureSubscription: $(serviceConnectionName)
+      addSpnToEnvironment: true
       scriptType: "pscore"
       scriptLocation: "inlineScript"
       workingDirectory: '$(Build.SourcesDirectory)/bicep/tests'
