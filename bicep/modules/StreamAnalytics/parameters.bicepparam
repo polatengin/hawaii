@@ -1,7 +1,7 @@
 using './main.bicep'
 
 param name = 'clstr-test-${readEnvironmentVariable('buildId', '001')}'
-param streamAnalyticsJobName = 'testjob'
+param streamAnalyticsJobName = 'testjob-${readEnvironmentVariable('buildId', '001')}'
 param streamAnalyticsFunctionName = 'testfunction'
 param streamAnalyticsInputName = 'testinput'
 param streamAnalyticsOutputName = 'testoutput'
