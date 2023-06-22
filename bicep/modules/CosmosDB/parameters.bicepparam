@@ -13,5 +13,5 @@ param dataActions = [
   'Microsoft.DocumentDB/databaseAccounts/readMetadata'
   'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/*'
 ]
-param svcPrincipalObjectId = ''
+param svcPrincipalObjectId = readEnvironmentVariable('AZ_SP_APP_ID', '')
 param roleDefinitionName = 'My Read Write Role'
