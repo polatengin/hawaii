@@ -49,14 +49,14 @@ jobs:
         Write-Host "BuildId: $(buildId)"
 
         Write-Host "Creating resource group: $(resourceGroupName)"
-        az group create --name $(resourceGroupName) --location $(location) --output none
+        az group create --name "$(resourceGroupName)" --location "$(location)" --output "none"
         Write-Host "Resource group created: $(resourceGroupName)"
 
         foreach ($module in Get-ChildItem -Path "./bicep/modules" -Directory | Where-Object { $_.Name -notlike "_*" }) {
           $modulePath = $module.FullName
 
           Write-Host "Processing module: ${modulePath}"
-          az deployment group create --resource-group $(resourceGroupName) --template-file "$modulePath/main.bicep" --parameters "$modulePath/parameters.bicepparam" --output none
+          az deployment group create --resource-group "$(resourceGroupName)" --template-file "$modulePath/main.bicep" --parameters "$modulePath/parameters.bicepparam" --output "none"
           Write-Host "Module deployed: ${modulePath}"
         }
 
