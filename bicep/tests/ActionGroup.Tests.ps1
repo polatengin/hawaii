@@ -3,7 +3,7 @@
 }
 
 Describe "Verify Action Group" {
-  $rgName = "${resourceGroupName}"
+  $rgName = "rg-hawaii-${env:buildId}"
   $actionGroupName = "aghawaii${env:buildId}"
   $location = "global"
   $noActionGroupName = "noactiongroup"

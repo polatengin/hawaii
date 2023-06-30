@@ -3,9 +3,9 @@
 }
 
 Describe "Verify AKS Cluster" {
-  $rgName = "${resourceGroupName}"
+  $rgName = "rg-hawaii-${env:buildId}"
   $aksName  = "aks-hawaii-${env:buildId}"
-  $location = "westus3"
+  $location = "${location}"
   $noAksClusterName = "noakscluster"
 
   It "Should contain an AKS Cluster named $aksName" {
