@@ -41,6 +41,9 @@ jobs:
 
   - task: AzureCLI@2
     displayName: "Deploy Resource Group"
+    env:
+      buildId: $(buildId)
+      location: $(location)
     inputs:
       azureSubscription: $(serviceConnectionName)
       addSpnToEnvironment: true
