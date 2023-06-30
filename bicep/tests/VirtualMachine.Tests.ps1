@@ -8,7 +8,7 @@
 }
 
 Describe 'Verify Virtual Machine' {
-  It "Should contain a Virtual Machine named $vmName - Confirm-AzBPResource" {
+  It "Should contain a Virtual Machine named $vmName" {
     # arrange
     $params = @{
       ResourceType      = "VirtualMachine"
@@ -61,9 +61,4 @@ Describe 'Verify Virtual Machine' {
     Confirm-AzBPVirtualMachine -ResourceGroupName $rgName -VirtualMachineName $vmName
     | Should -BeInResourceGroup $rgName
   }
-}
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
 }

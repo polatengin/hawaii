@@ -8,7 +8,7 @@
 }
 
 Describe 'Verify Role Assignment Exists' {
-  It "Should contain a Service Principal with $roleName Role - Confirm-AzBPResource" {
+  It "Should contain a Service Principal with $roleName Role" {
     # arrange
     $params = @{
       ResourceType         = 'RoleAssignment'
@@ -21,7 +21,7 @@ Describe 'Verify Role Assignment Exists' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Service Principal with $roleName Role - Confirm-AzBPResource" {
+  It "Should contain a Service Principal with $roleName Role" {
     # arrange
     $params = @{
       ResourceType         = 'RoleAssignment'
@@ -48,9 +48,4 @@ Describe 'Verify Role Assignment Exists' {
     Confirm-AzBPRoleAssignment @params | Should -Not -BeSuccessful
   }
 
-}
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
 }

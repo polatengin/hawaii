@@ -12,7 +12,7 @@ Describe 'Verify Event Hub' {
     $Script:noEventHub = 'noeventhub'
   }
 
-  It "Should contain an Event Hub named $eventHubName - Confirm-AzBPResource" {
+  It "Should contain an Event Hub named $eventHubName" {
     # arrange
     $params = @{
       ResourceType      = "EventHub"
@@ -25,7 +25,7 @@ Describe 'Verify Event Hub' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain an Event Hub named $eventHubName - Confirm-AzBPResource" {
+  It "Should contain an Event Hub named $eventHubName" {
     # arrange
     $params = @{
       ResourceType      = "EventHub"
@@ -82,7 +82,7 @@ Describe 'Verify Event Hub Namespace' {
     $Script:noNameSpaceName = 'nosamplenamespace'
   }
 
-  It "Should contain an Event Hub Namespace named $nameSpaceName - Confirm-AzBPResource" {
+  It "Should contain an Event Hub Namespace named $nameSpaceName" {
     # arrange
     $params = @{
       ResourceType      = "EventHubNamespace"
@@ -94,7 +94,7 @@ Describe 'Verify Event Hub Namespace' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain an Event Hub Namespace named $nameSpaceName - Confirm-AzBPResource" {
+  It "Should contain an Event Hub Namespace named $nameSpaceName" {
     # arrange
     $params = @{
       ResourceType      = "EventHubNamespace"
@@ -129,7 +129,7 @@ Describe 'Verify Event Hub Consumer Group' {
     $Script:noConsumerGroupName = 'noeventhubconsumergroup'
   }
 
-  It "Should contain an Event Hub Consumer Group named $consumerGroupName - Confirm-AzBPResource" {
+  It "Should contain an Event Hub Consumer Group named $consumerGroupName" {
     # arrange
     $params = @{
       ResourceType      = "EventHubConsumerGroup"
@@ -143,7 +143,7 @@ Describe 'Verify Event Hub Consumer Group' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain an Event Hub Consumer Group named $consumerGroupName - Confirm-AzBPResource" {
+  It "Should contain an Event Hub Consumer Group named $consumerGroupName" {
     # arrange
     $params = @{
       ResourceType      = "EventHubConsumerGroup"
@@ -197,9 +197,4 @@ Describe 'Verify Event Hub Consumer Group' {
     # act and assert
     Confirm-AzBPEventHubConsumerGroup @params | Should -BeInResourceGroup $rgName
   }
-}
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
 }

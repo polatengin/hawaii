@@ -8,7 +8,7 @@
 }
 
 Describe 'Verify Web App Exists' {
-  It "Should contain a Web App named $webappName - Confirm-AzBPResource" {
+  It "Should contain a Web App named $webappName" {
     # arrange
     $params = @{
       ResourceType      = "WebApp"
@@ -61,7 +61,7 @@ Describe 'Verify Web App Config'{
     $Script:appInsightsSettingName = 'APPLICATIONINSIGHTS_CONNECTION_STRING'
   }
 
-  It "Should contain an App Setting named $appInsightsSettingName - Confirm-AzBPResource" {
+  It "Should contain an App Setting named $appInsightsSettingName" {
     # arrange
     $params = @{
       ResourceType      = "WebApp"
@@ -82,7 +82,7 @@ Describe 'Verify Web App Static Site Exists' {
     $Script:noWebAppStaticSiteName = 'nostaticwebapptest'
   }
 
-  It "Should contain a Web App named $webappStaticSiteName - Confirm-AzBPResource" {
+  It "Should contain a Web App named $webappStaticSiteName" {
     # arrange
     $params = @{
       ResourceType      = "WebAppStaticSite"
@@ -137,9 +137,4 @@ Describe 'Verify Web App Static Site Exists' {
     Confirm-AzBPWebAppStaticSite -ResourceGroupName $rgName -StaticWebAppName $webappStaticSiteName
     | Should -BeInResourceGroup $rgName
   }
-}
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
 }

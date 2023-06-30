@@ -11,7 +11,7 @@ Describe 'Verify Synapse Workspace' {
     $Script:noWorkspaceName = 'nosamplesynws'
   }
 
-  It "Should contain a Synapse Workspace named $workSpaceName - Confirm-AzBPResource" {
+  It "Should contain a Synapse Workspace named $workSpaceName" {
     # arrange
     $params = @{
       ResourceType      = "SynapseWorkspace"
@@ -73,7 +73,7 @@ Describe 'Verify Synapse Spark/SQL Pool' {
     $Script:sqlPoolName = 'samplesql'
   }
 
-  It "Should contain a Synapse Spark Pool named $sparkPoolName - Confirm-AzBPResource" {
+  It "Should contain a Synapse Spark Pool named $sparkPoolName" {
     # arrange
     $params = @{
       ResourceType      = "SynapseSparkPool"
@@ -138,7 +138,7 @@ Describe 'Verify Synapse Spark/SQL Pool' {
 
 #######################################################################################################################
 
-  It "Should contain a Synapse SQL Pool named $sqlPoolName - Confirm-AzBPResource" {
+  It "Should contain a Synapse SQL Pool named $sqlPoolName" {
     # arrange
     $params = @{
       ResourceType      = "SynapseSqlPool"
@@ -201,9 +201,4 @@ Describe 'Verify Synapse Spark/SQL Pool' {
     # act and assert
     Confirm-AzBPSynapseSqlPool @params | Should -BeInResourceGroup $rgName
   }
-}
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
 }

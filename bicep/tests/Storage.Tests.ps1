@@ -11,7 +11,7 @@ Describe 'Verify Storage Account' {
     $Script:noAccountName = 'noazbenchpressstorage'
   }
 
-  It "Should contain a Storage Account named $accountName - Confirm-AzBPResource" {
+  It "Should contain a Storage Account named $accountName" {
     # arrange
     $params = @{
       ResourceType      = "StorageAccount"
@@ -64,7 +64,7 @@ Describe 'Verify Storage Container' {
     $Script:noContainerName = 'noazbenchpresscontainer'
   }
 
-  It "Should contain a Storage Container named $containerName - Confirm-AzBPResource" {
+  It "Should contain a Storage Container named $containerName" {
     # arrange
     $params = @{
       ResourceType      = "StorageContainer"
@@ -119,9 +119,4 @@ Describe 'Verify Storage Container' {
     # act and assert
     Confirm-AzBPStorageContainer @params | Should -Not -BeSuccessful
   }
-}
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
 }

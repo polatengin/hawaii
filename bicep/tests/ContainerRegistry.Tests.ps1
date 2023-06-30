@@ -8,7 +8,7 @@
 }
 
 Describe 'Verify Container Registry' {
-  It "Should contain a Container Registry named $acrName - Confirm-AzBPResource" {
+  It "Should contain a Container Registry named $acrName" {
     # arrange
     $params = @{
       ResourceType      = "ContainerRegistry"
@@ -20,7 +20,7 @@ Describe 'Verify Container Registry' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Container Registry named $acrName with a Standard SKU - Confirm-AzBPResource" {
+  It "Should contain a Container Registry named $acrName with a Standard SKU" {
     # arrange
     $params = @{
       ResourceType      = "ContainerRegistry"
@@ -60,9 +60,4 @@ Describe 'Verify Container Registry' {
   It "Should contain a Container Registry named $acrName in $rgName" {
     Confirm-AzBPContainerRegistry -ResourceGroupName $rgName -Name $acrName | Should -BeInResourceGroup $rgName
   }
-}
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
 }

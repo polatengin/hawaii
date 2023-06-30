@@ -11,7 +11,7 @@ Describe 'Verify Data Factory' {
     $Script:noDataFactoryName = 'nosampleadf'
   }
 
-  It "Should contain a Data Factory named $dataFactoryName - Confirm-AzBPResource" {
+  It "Should contain a Data Factory named $dataFactoryName" {
     # arrange
     $params = @{
       ResourceType      = "DataFactory"
@@ -23,7 +23,7 @@ Describe 'Verify Data Factory' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Data Factory named $dataFactoryName - Confirm-AzBPResource" {
+  It "Should contain a Data Factory named $dataFactoryName" {
     # arrange
     $params = @{
       ResourceType      = "DataFactory"
@@ -63,7 +63,7 @@ Describe 'Verify Data Factory Linked Service' {
     $Script:linkedServiceName = 'BenchpressStorageLinkedService'
   }
 
-  It "Should contain a Data Factory with a Linked Service named $linkedServiceName - Confirm-AzBPResource" {
+  It "Should contain a Data Factory with a Linked Service named $linkedServiceName" {
     # arrange
     $params = @{
       ResourceType      = 'DataFactoryLinkedService'
@@ -76,7 +76,7 @@ Describe 'Verify Data Factory Linked Service' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Data Factory with a Linked Service named $linkedServiceName - Confirm-AzBPResource" {
+  It "Should contain a Data Factory with a Linked Service named $linkedServiceName" {
     # arrange
     $params = @{
       ResourceType      = 'DataFactoryLinkedService'
@@ -102,9 +102,4 @@ Describe 'Verify Data Factory Linked Service' {
     # act and assert
     Confirm-AzBPDataFactoryLinkedService @params | Should -BeSuccessful
   }
-}
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
 }

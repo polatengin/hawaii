@@ -8,7 +8,7 @@
 }
 
 Describe 'Verify Application Insights' {
-  It "Should contain an Application Insights named $appInsightsName - Confirm-AzBPResource" {
+  It "Should contain an Application Insights named $appInsightsName" {
     # arrange
     $params = @{
       ResourceType      = "AppInsights"
@@ -63,7 +63,7 @@ Describe 'Verify Diagnostic Setting' {
     $Script:noDiagnosticSettingName = 'nodiagnosticsettingtest'
   }
 
-  It "Should contain a Diagnostic Setting named $diagnosticSettingName - Confirm-AzBPResource" {
+  It "Should contain a Diagnostic Setting named $diagnosticSettingName" {
     # arrange
     $params = @{
       ResourceType      = "DiagnosticSetting"
@@ -97,9 +97,4 @@ Describe 'Verify Diagnostic Setting' {
   It "Should contain a Diagnostic Setting named $diagnosticSettingName in $rgName" {
     Confirm-AzBPDiagnosticSetting -ResourceId $ResourceId -Name $diagnosticSettingName | Should -BeInResourceGroup $rgName
   }
-}
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
 }

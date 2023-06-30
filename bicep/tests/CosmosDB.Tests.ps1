@@ -14,7 +14,7 @@
 }
 
 Describe 'Verify Cosmos DB Account' {
-  It "Should contain a Gremlin Cosmos DB Account named $gremlinAccountName - Confirm-AzBPResource" {
+  It "Should contain a Gremlin Cosmos DB Account named $gremlinAccountName" {
     # arrange
     $params = @{
       ResourceType      = "CosmosDBAccount"
@@ -41,7 +41,7 @@ Describe 'Verify Cosmos DB Account' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Gremlin Cosmos DB named $gremlinDatabaseName - Confirm-AzBPResource" {
+  It "Should contain a Gremlin Cosmos DB named $gremlinDatabaseName" {
     # arrange
     $params = @{
       ResourceType      = "CosmosDBGremlinDatabase"
@@ -54,7 +54,7 @@ Describe 'Verify Cosmos DB Account' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Gremlin Cosmos DB named $gremlinDatabaseName - Confirm-AzBPResource" {
+  It "Should contain a Gremlin Cosmos DB named $gremlinDatabaseName" {
     # arrange
     $params = @{
       ResourceType      = "CosmosDBGremlinDatabase"
@@ -71,7 +71,7 @@ Describe 'Verify Cosmos DB Account' {
 
 #######################################################################################################################
 
-  It "Should contain a Mongo Cosmos DB Account named $mongoAccountName - Confirm-AzBPResource" {
+  It "Should contain a Mongo Cosmos DB Account named $mongoAccountName" {
     # arrange
     $params = @{
       ResourceType      = "CosmosDBAccount"
@@ -98,7 +98,7 @@ Describe 'Verify Cosmos DB Account' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Mongo Cosmos DB named $mongoDatabaseName - Confirm-AzBPResource" {
+  It "Should contain a Mongo Cosmos DB named $mongoDatabaseName" {
     # arrange
     $params = @{
       ResourceType      = "CosmosDBMongoDBDatabase"
@@ -128,7 +128,7 @@ Describe 'Verify Cosmos DB Account' {
 
 #######################################################################################################################
 
-  It "Should contain a SQL Cosmos DB Account named $sqlAccountName - Confirm-AzBPResource" {
+  It "Should contain a SQL Cosmos DB Account named $sqlAccountName" {
     # arrange
     $params = @{
       ResourceType      = "CosmosDBAccount"
@@ -155,7 +155,7 @@ Describe 'Verify Cosmos DB Account' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a SQL Cosmos DB named $sqlDatabaseName - Confirm-AzBPResource" {
+  It "Should contain a SQL Cosmos DB named $sqlDatabaseName" {
     # arrange
     $params = @{
       ResourceType      = "CosmosDBSqlDatabase"
@@ -168,7 +168,7 @@ Describe 'Verify Cosmos DB Account' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a SQL Cosmos DB named $sqlDatabaseName - Confirm-AzBPResource" {
+  It "Should contain a SQL Cosmos DB named $sqlDatabaseName" {
     # arrange
     $params = @{
       ResourceType      = "CosmosDBSqlDatabase"
@@ -183,7 +183,7 @@ Describe 'Verify Cosmos DB Account' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Cosmos DB SQL Role Assignment named $sqlRoleAssignmentId - Confirm-AzBPResource" {
+  It "Should contain a Cosmos DB SQL Role Assignment named $sqlRoleAssignmentId" {
     #arrange
     $params = @{
       ResourceType      = "CosmosDBSqlRoleAssignment"
@@ -196,7 +196,7 @@ Describe 'Verify Cosmos DB Account' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Cosmos DB SQL Role Assignment named $sqlRoleAssignmentId - Confirm-AzBPResource" {
+  It "Should contain a Cosmos DB SQL Role Assignment named $sqlRoleAssignmentId" {
     #arrange
     $params = @{
       ResourceType      = "CosmosDBSqlRoleAssignment"
@@ -211,7 +211,7 @@ Describe 'Verify Cosmos DB Account' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Cosmos DB SQL Role Definition named $sqlRoleDefinitionId - Confirm-AzBPResource" {
+  It "Should contain a Cosmos DB SQL Role Definition named $sqlRoleDefinitionId" {
     #arrange
     $params = @{
       ResourceType      = "CosmosDBSqlRoleDefinition"
@@ -224,7 +224,7 @@ Describe 'Verify Cosmos DB Account' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Cosmos DB SQL Role Definition named $sqlRoleDefinitionId - Confirm-AzBPResource" {
+  It "Should contain a Cosmos DB SQL Role Definition named $sqlRoleDefinitionId" {
     #arrange
     $params = @{
       ResourceType      = "CosmosDBSqlRoleDefinition"
@@ -560,9 +560,4 @@ Describe 'Comsos DB SQL Role Definition' {
     # act and assert
     Confirm-AzBPCosmosDBSqlRoleDefinition @params | Should -BeInResourceGroup $rgName
   }
-}
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
 }

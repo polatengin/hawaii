@@ -8,7 +8,7 @@
 }
 
 Describe 'Verify Operational Insights Workspace Exists' {
-  It "Should contain an Operational Insights Workspace named $oiwName - Confirm-AzBPResource" {
+  It "Should contain an Operational Insights Workspace named $oiwName" {
     # arrange
     $params = @{
       ResourceType      = "OperationalInsightsWorkspace"
@@ -21,7 +21,7 @@ Describe 'Verify Operational Insights Workspace Exists' {
   }
 
 
-  It "Should contain an Operational Insights Workspace named $oiwName - Confirm-AzBPResource" {
+  It "Should contain an Operational Insights Workspace named $oiwName" {
     # arrange
     $params = @{
       ResourceType      = "OperationalInsightsWorkspace"
@@ -62,9 +62,4 @@ Describe 'Verify Operational Insights Workspace Exists' {
     Confirm-AzBPOperationalInsightsWorkspace -ResourceGroupName $rgName -Name $oiwName
     | Should -BeInResourceGroup $rgName
   }
-}
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
 }

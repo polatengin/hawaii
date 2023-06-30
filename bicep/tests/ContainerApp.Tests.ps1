@@ -11,7 +11,7 @@ Describe 'Verify Container Application' {
     $Script:noContainerAppName = 'nocontainerapp'
   }
 
-  It "Should contain a Container Application named $containerAppName - Confirm-AzBPResource" {
+  It "Should contain a Container Application named $containerAppName" {
     # arrange
     $params = @{
       ResourceType      = "ContainerApp"
@@ -23,7 +23,7 @@ Describe 'Verify Container Application' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Container Application with an Ingress Port of 80 - Confirm-AzBPResource" {
+  It "Should contain a Container Application with an Ingress Port of 80" {
     # arrange
     $params = @{
       ResourceType      = "ContainerApp"
@@ -71,7 +71,7 @@ Describe 'Verify Container Application Managed Environment' {
     $Script:noManagedEnvName = 'nomanagedenv'
   }
 
-  It "Should contain a Container Application Managed Environment named $managedEnvName - Confirm-AzBPResource" {
+  It "Should contain a Container Application Managed Environment named $managedEnvName" {
     # arrange
     $params = @{
       ResourceType      = "ContainerAppManagedEnv"
@@ -111,9 +111,4 @@ Describe 'Verify Container Application Managed Environment' {
     Confirm-AzBPContainerAppManagedEnv -ResourceGroupName $rgName -Name $managedEnvName
     | Should -BeInResourceGroup $rgName
   }
-}
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
 }

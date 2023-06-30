@@ -9,7 +9,7 @@
 }
 
 Describe 'Verify SQL Database' {
-  It "Should contain a SQL Database named $databaseName - Confirm-AzBPResource" {
+  It "Should contain a SQL Database named $databaseName" {
     # arrange
     $params = @{
       ResourceType      = "SqlDatabase"
@@ -23,7 +23,7 @@ Describe 'Verify SQL Database' {
   }
 
 
-  It "Should contain a SQL Database named $databaseName - Confirm-AzBPResource" {
+  It "Should contain a SQL Database named $databaseName" {
     # arrange
     $params = @{
       ResourceType      = "SqlDatabase"
@@ -96,7 +96,7 @@ Describe 'Verify SQL Server' {
     $Script:noServerName = 'nosamplesqlserver'
   }
 
-  It "Should contain a SQL Server named $serverName - Confirm-AzBPResource" {
+  It "Should contain a SQL Server named $serverName" {
     # arrange
     $params = @{
       ResourceType      = "SqlServer"
@@ -109,7 +109,7 @@ Describe 'Verify SQL Server' {
   }
 
 
-  It "Should contain a SQL Server named $serverName - Confirm-AzBPResource" {
+  It "Should contain a SQL Server named $serverName" {
     # arrange
     $params = @{
       ResourceType      = "SqlServer"
@@ -144,8 +144,3 @@ Describe 'Verify SQL Server' {
   }
 }
 
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
-}

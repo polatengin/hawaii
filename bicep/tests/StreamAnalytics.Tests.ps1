@@ -10,7 +10,7 @@ Describe 'Verify Stream Analytics Cluster' {
     $Script:clusterName = 'teststreamcluster'
   }
 
-  It "Should contain a Stream Analytics Cluster named $clusterName - Confirm-AzBPResource" {
+  It "Should contain a Stream Analytics Cluster named $clusterName" {
     # arrange
     $params = @{
       ResourceType      = "StreamAnalyticsCluster"
@@ -59,7 +59,7 @@ Describe 'Stream Analytics Jobs' {
     $Script:transformationName = 'testtransformation'
   }
 
-  It "Should contain a Stream Analytics Job named $jobName - Confirm-AzBPResource" {
+  It "Should contain a Stream Analytics Job named $jobName" {
     # arrange
     $params = @{
       ResourceType      = "StreamAnalyticsJob"
@@ -99,7 +99,7 @@ Describe 'Stream Analytics Jobs' {
 
 #######################################################################################################################
 
-  It "Should contain a Stream Analytics Function named $functionName - Confirm-AzBPResource" {
+  It "Should contain a Stream Analytics Function named $functionName" {
     # arrange
     $params = @{
       ResourceType      = "StreamAnalyticsFunction"
@@ -153,7 +153,7 @@ Describe 'Stream Analytics Jobs' {
 
 #######################################################################################################################
 
-  It "Should contain a Stream Analytics Input named $inputName - Confirm-AzBPResource" {
+  It "Should contain a Stream Analytics Input named $inputName" {
     # arrange
     $params = @{
       ResourceType      = "StreamAnalyticsInput"
@@ -207,7 +207,7 @@ Describe 'Stream Analytics Jobs' {
 
 #######################################################################################################################
 
-  It "Should contain a Stream Analytics Output named $outputName - Confirm-AzBPResource" {
+  It "Should contain a Stream Analytics Output named $outputName" {
     # arrange
     $params = @{
       ResourceType      = "StreamAnalyticsOutput"
@@ -312,9 +312,4 @@ Describe 'Stream Analytics Jobs' {
     # act and assert
     Confirm-AzBPStreamAnalyticsTransformation @params | Should -BeInResourceGroup $rgName
   }
-}
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
 }

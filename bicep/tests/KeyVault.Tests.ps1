@@ -12,7 +12,7 @@
 }
 
 Describe 'Verify Key Vault' {
-  It "Should contain a Key Vault named $kvName - Confirm-AzBPResource" {
+  It "Should contain a Key Vault named $kvName" {
     # arrange
     $params = @{
       ResourceType      = "KeyVault"
@@ -66,9 +66,4 @@ Describe 'Verify Key Vault' {
   It "Should contain a Key Vault named $kvName in $rgName" {
     Confirm-AzBPKeyVault -ResourceGroupName $rgName -Name $kvName | Should -BeInResourceGroup $rgName
   }
-}
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
 }

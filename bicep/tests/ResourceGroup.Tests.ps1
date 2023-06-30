@@ -7,7 +7,7 @@
 }
 
 Describe 'Verify Resource Group Exists' {
-  It "Should contain a Resource Group named $rgName - Confirm-AzBPResource" {
+  It "Should contain a Resource Group named $rgName" {
     # arrange
     $params = @{
       ResourceType      = "ResourceGroup"
@@ -19,7 +19,7 @@ Describe 'Verify Resource Group Exists' {
   }
 
 
-  It "Should contain a Resource Group named $rgName - Confirm-AzBPResource" {
+  It "Should contain a Resource Group named $rgName" {
     # arrange
     $params = @{
       ResourceType      = "ResourceGroup"
@@ -46,9 +46,4 @@ Describe 'Verify Resource Group Exists' {
   It "Should contain a Resource Group named $rgName in $location" {
     Confirm-AzBPResourceGroup -ResourceGroupName $rgName | Should -BeInLocation $location
   }
-}
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
 }

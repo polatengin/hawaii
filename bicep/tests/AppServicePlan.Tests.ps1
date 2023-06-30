@@ -8,7 +8,7 @@
 }
 
 Describe 'Verify App Service Plan' {
-  It "Should contain an App Service Plan named $appServicePlanName - Confirm-AzBPResource" {
+  It "Should contain an App Service Plan named $appServicePlanName" {
     # arrange
     $params = @{
       ResourceType      = "Appserviceplan"
@@ -20,7 +20,7 @@ Describe 'Verify App Service Plan' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain an App Service Plan named $appServicePlanName with a Free SKU - Confirm-AzBPResource" {
+  It "Should contain an App Service Plan named $appServicePlanName with a Free SKU" {
     # arrange
     $params = @{
       ResourceType      = "Appserviceplan"
@@ -63,9 +63,4 @@ Describe 'Verify App Service Plan' {
     Confirm-AzBPAppServicePlan -ResourceGroupName $rgName -AppServicePlanName $appServicePlanName
     | Should -BeInResourceGroup $rgName
   }
-}
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
 }

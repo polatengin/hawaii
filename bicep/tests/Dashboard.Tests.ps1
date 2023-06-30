@@ -7,7 +7,7 @@
 }
 
 Describe 'Verify Dashboard' {
-  It "Should contain a Dashboard named $dashboardName - Confirm-AzBPResource" {
+  It "Should contain a Dashboard named $dashboardName" {
     # arrange
     $params = @{
       ResourceType      = "PortalDashboard"
@@ -19,7 +19,7 @@ Describe 'Verify Dashboard' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Dashboard named $dashboardName - Confirm-AzBPResource" {
+  It "Should contain a Dashboard named $dashboardName" {
     # arrange
     $params = @{
       ResourceType      = "PortalDashboard"

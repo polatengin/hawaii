@@ -8,7 +8,7 @@
 }
 
 Describe 'Verify PostgreSql Flexible Server' {
-  It "Should contain a PostgreSQL Flexible Server named $serverName - Confirm-AzBPResource" {
+  It "Should contain a PostgreSQL Flexible Server named $serverName" {
     # arrange
     $params = @{
       ResourceType      = "PostgreSqlFlexibleServer"
@@ -20,7 +20,7 @@ Describe 'Verify PostgreSql Flexible Server' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a PostgreSQL Flexible Server with Name property of $serverName - Confirm-AzBPResource" {
+  It "Should contain a PostgreSQL Flexible Server with Name property of $serverName" {
     # arrange
     $params = @{
       ResourceType      = "PostgreSqlFlexibleServer"
@@ -46,9 +46,4 @@ Describe 'Verify PostgreSql Flexible Server' {
     Confirm-AzBPPostgreSqlFlexibleServer -ResourceGroupName $rgName -Name $serverName
     | Should -BeInResourceGroup $rgName
   }
-}
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
 }
