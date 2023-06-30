@@ -1,17 +1,14 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
-
-  $Script:rgName   = 'rg-test'
-  $Script:aksName  = 'aksbenchpresstest'
-  $Script:location = 'westus3'
 }
 
-Describe 'Verify AKS Cluster' {
-  BeforeAll {
-    $Script:noAksClusterName = 'noakscluster'
-  }
+Describe "Verify AKS Cluster" {
+  $rgName = "${resourceGroupName}"
+  $aksName  = "aks-hawaii-${env:buildId}"
+  $location = "westus3"
+  $noAksClusterName = "noakscluster"
 
-  It "Should contain an AKS Cluster named $aksName - Confirm-AzBPResource" {
+  It "Should contain an AKS Cluster named $aksName" {
     # arrange
     $params = @{
       ResourceType      = "AksCluster"
@@ -23,7 +20,7 @@ Describe 'Verify AKS Cluster' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain an AKS Cluster named $aksName with an Agent Pool Profile named agentpool - Confirm-AzBPResource" {
+  It "Should contain an AKS Cluster named $aksName with an Agent Pool Profile named agentpool" {
     # arrange
     $params = @{
       ResourceType      = "AksCluster"
@@ -42,11 +39,10 @@ Describe 'Verify AKS Cluster' {
   }
 
   It "Should not contain an AKS Cluster named $noAksClusterName" {
-    # The '-ErrorAction SilentlyContinue' command suppresses all errors.
+    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
-    Confirm-AzBPAksCluster -ResourceGroupName $rgName -AKSName $noAksClusterName -ErrorAction SilentlyContinue
-    | Should -Not -BeSuccessful
+    Confirm-AzBPAksCluster -ResourceGroupName $rgName -AKSName $noAksClusterName -ErrorAction SilentlyContinue | Should -Not -BeSuccessful
   }
   It "Should contain an AKS Cluster named $aksName in $location" {
     Confirm-AzBPAksCluster -ResourceGroupName $rgName -AKSName $aksName | Should -BeInLocation $location
@@ -57,13 +53,13 @@ Describe 'Verify AKS Cluster' {
   }
 }
 
-Describe 'Verify AKS Node Pool' {
-  BeforeAll {
-    $Script:nodePoolName   = 'nodepoolbenchpresstest'
-    $Script:noNodePoolName = 'noaksnodepool'
-  }
+Describe "Verify AKS Node Pool" {
+  $rgName = "${resourceGroupName}"
+  $aksName  = "aks-hawaii-${env:buildId}"
+  $nodePoolName   = "nodepoolbenchpresstest"
+  $noNodePoolName = "noaksnodepool"
 
-  It "Should contain an AKS Node Pool named $nodePoolName - Confirm-AzBPResource" {
+  It "Should contain an AKS Node Pool named $nodePoolName" {
     # arrange
     $params = @{
       ResourceType      = "AksNodePool"
@@ -76,7 +72,7 @@ Describe 'Verify AKS Node Pool' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain an AKS NodePool named $nodePoolName - Confirm-AzBPResource" {
+  It "Should contain an AKS NodePool named $nodePoolName" {
     # arrange
     $params = @{
       ResourceType      = "AksNodePool"
@@ -97,7 +93,7 @@ Describe 'Verify AKS Node Pool' {
 
   It "Should not contain an AKS Node Pool named $noNodePoolName" {
     # arrange
-    # The '-ErrorAction SilentlyContinue' command suppresses all errors.
+    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     $params = @{
@@ -110,9 +106,4 @@ Describe 'Verify AKS Node Pool' {
     # act and assert
     Confirm-AzBPAksNodePool @params | Should -Not -BeSuccessful
   }
-}
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
 }
