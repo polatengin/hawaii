@@ -36,6 +36,9 @@ jobs:
         az bicep install
         az bicep upgrade
 
+        Install-Module -Name Pester -Force
+        Install-Module -Name Az.InfrastructureTesting -Force
+
   - task: AzureCLI@2
     displayName: "Deploy Resource Group"
     env:
