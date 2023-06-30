@@ -41,16 +41,12 @@ jobs:
 
   - task: AzureCLI@2
     displayName: "Deploy Resource Group"
-    env:
-      buildId: $(buildId)
     inputs:
       azureSubscription: $(serviceConnectionName)
       addSpnToEnvironment: true
       scriptType: "pscore"
       scriptLocation: "inlineScript"
       inlineScript: |
-        Write-Host "BuildId: $(buildId)"
-
         Write-Host "Creating resource group: $(resourceGroupName)"
         az group create --name "$(resourceGroupName)" --location "$(location)" --output "none"
         Write-Host "Resource group created: $(resourceGroupName)"
@@ -65,8 +61,6 @@ jobs:
 
   - task: AzureCLI@2
     displayName: "Run e2e tests"
-    env:
-      buildId: $(buildId)
     inputs:
       azureSubscription: $(serviceConnectionName)
       addSpnToEnvironment: true
