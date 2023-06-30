@@ -1,17 +1,17 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
-
-  $Script:rgName = 'rg-test'
-  $Script:actionGroupName = 'sampleaction'
-  $Script:location = 'global'
-  $Script:noActionGroupName = "noactiongroup"
 }
 
-Describe 'Verify Action Group' {
-  It "Should contain an Action Group named $actionGroupName - Confirm-AzBPResource" {
+Describe "Verify Action Group" {
+  $rgName = "${resourceGroupName}"
+  $actionGroupName = "aghawaii${env:buildId}"
+  $location = "global"
+  $noActionGroupName = "noactiongroup"
+
+  It "Should contain an Action Group named $actionGroupName" {
     # arrange
     $params = @{
-      ResourceType      = 'ActionGroup'
+      ResourceType      = "ActionGroup"
       ResourceName      = $actionGroupName
       ResourceGroupName = $rgName
     }
@@ -20,10 +20,10 @@ Describe 'Verify Action Group' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain an Action Group named $actionGroupName - Confirm-AzBPResource" {
+  It "Should contain an Action Group named $actionGroupName" {
     # arrange
     $params = @{
-      ResourceType      = 'ActionGroup'
+      ResourceType      = "ActionGroup"
       ResourceName      = $actionGroupName
       ResourceGroupName = $rgName
       PropertyKey       = "GroupShortName"
@@ -40,7 +40,7 @@ Describe 'Verify Action Group' {
 
   It "Should not contain an Action Group named $noActionGroupName" {
     # arrange
-    # The '-ErrorAction SilentlyContinue' command suppresses all errors.
+    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     $params = @{
@@ -53,17 +53,10 @@ Describe 'Verify Action Group' {
   }
 
   It "Should contain an Action Group named $actionGroupName in $location" {
-    Confirm-AzBPActionGroup -ResourceGroupName $rgName -ActionGroupName $actionGroupName
-    | Should -BeInLocation $location
+    Confirm-AzBPActionGroup -ResourceGroupName $rgName -ActionGroupName $actionGroupName | Should -BeInLocation $location
   }
 
   It "Should contain an Action Group named $actionGroupName in $rgName" {
-    Confirm-AzBPActionGroup -ResourceGroupName $rgName -ActionGroupName $actionGroupName
-    | Should -BeInResourceGroup $rgName
+    Confirm-AzBPActionGroup -ResourceGroupName $rgName -ActionGroupName $actionGroupName | Should -BeInResourceGroup $rgName
   }
-}
-
-AfterAll {
-  Get-Module Az.InfrastructureTesting | Remove-Module
-  Get-Module BenchPress.Azure | Remove-Module
 }
