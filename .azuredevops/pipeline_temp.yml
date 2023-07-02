@@ -1,0 +1,58 @@
+trigger: none
+
+pool: "Azure Pipelines"
+
+variables:
+  - group: "BenchPress"
+
+  - name: serviceConnectionName
+    value: "sc_arm"
+
+  - name: location
+    value: "westus"
+
+  - name: buildId
+    value: "518"
+
+  - name: resourceGroupName
+    value: "rg-hawaii-518"
+
+jobs:
+
+- job:
+  displayName: "Deploy and Test Bicep Modules"
+  timeoutInMinutes: 120
+
+  steps:
+
+  - task: AzureCLI@2
+    displayName: "Setup"
+    inputs:
+      azureSubscription: $(serviceConnectionName)
+      addSpnToEnvironment: true
+      scriptType: "pscore"
+      scriptLocation: "inlineScript"
+      inlineScript: |
+        az bicep install
+        az bicep upgrade
+
+        Install-Module -Name Pester -Force
+        Install-Module -Name Az.InfrastructureTesting -Force
+
+  - task: AzureCLI@2
+    displayName: "Run e2e tests"
+    env:
+      buildId: $(buildId)
+      location: $(location)
+      AZ_APPLICATION_ID: $(AZ_APPLICATION_ID)
+      AZ_ENCRYPTED_PASSWORD: $(AZ_ENCRYPTED_PASSWORD)
+      AZ_SUBSCRIPTION_ID: $(AZ_SUBSCRIPTION_ID)
+      AZ_TENANT_ID: $(AZ_TENANT_ID)
+    inputs:
+      azureSubscription: $(serviceConnectionName)
+      addSpnToEnvironment: true
+      scriptType: "pscore"
+      scriptLocation: "inlineScript"
+      workingDirectory: '$(Build.SourcesDirectory)/bicep/tests'
+      inlineScript: |
+        Invoke-Pester -OutputFile test.xml -OutputFormat NUnitXML
