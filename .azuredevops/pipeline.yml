@@ -67,6 +67,10 @@ jobs:
     env:
       buildId: $(buildId)
       location: $(location)
+      AZ_APPLICATION_ID: $(AZ_APPLICATION_ID)
+      AZ_ENCRYPTED_PASSWORD: $(AZ_ENCRYPTED_PASSWORD)
+      AZ_SUBSCRIPTION_ID: $(AZ_SUBSCRIPTION_ID)
+      AZ_TENANT_ID: $(AZ_TENANT_ID)
     inputs:
       azureSubscription: $(serviceConnectionName)
       addSpnToEnvironment: true
