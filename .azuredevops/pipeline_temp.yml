@@ -36,6 +36,7 @@ jobs:
         az bicep install
         az bicep upgrade
 
+        Install-Module -Name Az -Force
         Install-Module -Name Pester -Force
         Install-Module -Name Az.InfrastructureTesting -Force
 
