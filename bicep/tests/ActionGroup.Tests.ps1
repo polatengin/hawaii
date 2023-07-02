@@ -4,14 +4,13 @@
   $rgName = "rg-hawaii-${env:buildId}"
   $actionGroupName = "aghawaii${env:buildId}"
   $location = "global"
+  $emailReceiverAddress = "sampleactiongroup@contoso.com"
 
-  Write-Host "Running Action Group Tests for {buildId: $env:buildId}, {rgName: $rgName}, {actionGroupName: $actionGroupName}, {location: $location}"
+  Write-Host "Running Action Group Tests for {buildId: $env:buildId}, {rgName: $rgName}, {actionGroupName: $actionGroupName}, {location: $location}, {emailReceiverAddress: $emailReceiverAddress}"
 }
 
 Describe "Verify Action Group" {
-  It "Should contain an Action Group named $actionGroupName" {
-    param($actionGroupName)
-
+  It "Should contain the Action Group" {
     # act
     $result = Confirm-AzBPActionGroup -ResourceGroupName $rgName -ActionGroupName $actionGroupName
 
@@ -21,9 +20,7 @@ Describe "Verify Action Group" {
     $result | Should -Be -Not $null
   }
 
-  It "Should contain an Action Group named '{0}' in '{1}'" -TestCases $actionGroupName,$location {
-    param($actionGroupName, $location)
-
+  It "Should contain the Action Group in the location" {
     # act
     $result = Confirm-AzBPActionGroup -ResourceGroupName $rgName -ActionGroupName $actionGroupName
 
@@ -31,11 +28,27 @@ Describe "Verify Action Group" {
     $result.ResourceDetails.Location | Should -Be "$location"
   }
 
-  It "Should contain an Action Group named $actionGroupName in $rgName" {
+  It "Should contain the Action Group in the resource group" {
     # act
     $result = Confirm-AzBPActionGroup -ResourceGroupName $rgName -ActionGroupName $actionGroupName
 
     # assert
     $result.ResourceDetails.ResourceGroupName | Should -Be "$rgName"
+  }
+
+  It "Should contain the Action Group with one email receiver" {
+    # act
+    $result = Confirm-AzBPActionGroup -ResourceGroupName $rgName -ActionGroupName $actionGroupName
+
+    # assert
+    $result.ResourceDetails.EmailReceivers.Length | Should -Be 1
+  }
+
+  It "Should contain the Action Group with the correct email receivers" {
+    # act
+    $result = Confirm-AzBPActionGroup -ResourceGroupName $rgName -ActionGroupName $actionGroupName
+
+    # assert
+    $result.ResourceDetails.EmailReceivers[0].EmailAddress | Should -Be "$emailReceiverAddress"
   }
 }
