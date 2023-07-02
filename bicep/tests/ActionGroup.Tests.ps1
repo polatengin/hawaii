@@ -10,6 +10,8 @@
 
 Describe "Verify Action Group" {
   It "Should contain an Action Group named $actionGroupName" {
+    param($actionGroupName)
+
     # act
     $result = Confirm-AzBPActionGroup -ResourceGroupName $rgName -ActionGroupName $actionGroupName
 
@@ -19,7 +21,9 @@ Describe "Verify Action Group" {
     $result | Should -Be -Not $null
   }
 
-  It "Should contain an Action Group named $actionGroupName in $location" {
+  It "Should contain an Action Group named '{0}' in '{1}'" -TestCases $actionGroupName,$location {
+    param($actionGroupName, $location)
+
     # act
     $result = Confirm-AzBPActionGroup -ResourceGroupName $rgName -ActionGroupName $actionGroupName
 
