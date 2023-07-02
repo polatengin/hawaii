@@ -13,7 +13,7 @@ Describe "Verify Action Group" {
     # act
     $result = Confirm-AzBPActionGroup -ResourceGroupName $rgName -ActionGroupName $actionGroupName
 
-    Write-Host $result.ResourceDetails | ConvertTo-Json -Depth 100
+    Write-Host ($result.ResourceDetails | ConvertTo-Json -Depth 100)
 
     # assert
     $result | Should -Be -Not $null
@@ -32,6 +32,6 @@ Describe "Verify Action Group" {
     $result = Confirm-AzBPActionGroup -ResourceGroupName $rgName -ActionGroupName $actionGroupName
 
     # assert
-    $result | Should -BeInResourceGroup $rgName
+    $result.ResourceDetails.resourceGroup | Should -Be "$rgName"
   }
 }
