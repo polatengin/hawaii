@@ -24,7 +24,7 @@ Describe "Verify Action Group" {
     $result = Confirm-AzBPActionGroup -ResourceGroupName $rgName -ActionGroupName $actionGroupName
 
     # assert
-    $result.ResourceDetails.location | Should -Be "$location"
+    $result.ResourceDetails.Location | Should -Be "$location"
   }
 
   It "Should contain an Action Group named $actionGroupName in $rgName" {
@@ -32,6 +32,6 @@ Describe "Verify Action Group" {
     $result = Confirm-AzBPActionGroup -ResourceGroupName $rgName -ActionGroupName $actionGroupName
 
     # assert
-    $result.ResourceDetails.resourceGroup | Should -Be "$rgName"
+    $result.ResourceDetails.ResourceGroupName | Should -Be "$rgName"
   }
 }
