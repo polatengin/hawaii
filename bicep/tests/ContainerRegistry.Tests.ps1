@@ -2,9 +2,9 @@
   Import-Module Az.InfrastructureTesting
 
   # arrange
-  $rgName                  = "rg-test"
-  $acrName                 = "acrbenchpresstest"
-  $location                = "westus3"
+  $rgName = "rg-hawaii-${env:buildId}"
+  $location = "${env:location}"
+  $acrName = "acrbenchpresstest"
 
   # log
   Write-Host "Running Container Registry Tests for {rgName: $rgName}, {acrName: $acrName}, {location: $location}"
