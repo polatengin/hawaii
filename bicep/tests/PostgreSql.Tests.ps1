@@ -1,13 +1,13 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $rgName       = 'rg-test'
-  $location     = 'westus3'
-  $serverName   = 'samplepostgresqlserver'
-  $noServerName = 'nosamplepostgresqlserver'
+  $rgName       = "rg-test"
+  $location     = "westus3"
+  $serverName   = "samplepostgresqlserver"
+  $noServerName = "nosamplepostgresqlserver"
 }
 
-Describe 'Verify PostgreSql Flexible Server' {
+Describe "Verify PostgreSql Flexible Server" {
   It "Should contain the PostgreSQL Flexible Server named $serverName" {
     # arrange
     $params = @{
@@ -26,7 +26,7 @@ Describe 'Verify PostgreSql Flexible Server' {
       ResourceType      = "PostgreSqlFlexibleServer"
       ResourceName      = $serverName
       ResourceGroupName = $rgName
-      PropertyKey       = 'Name'
+      PropertyKey       = "Name"
       PropertyValue     = $serverName
     }
 

@@ -1,12 +1,12 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $rgName   = 'rg-test'
-  $location = 'westus3'
-  $dashboardName = 'sampleDashboard'
+  $rgName = "rg-hawaii-${env:buildId}"
+  $location = "${env:location}"
+  $dashboardName = "sampleDashboard"
 }
 
-Describe 'Verify Dashboard' {
+Describe "Verify Dashboard" {
   It "Should contain the Dashboard named $dashboardName" {
     # arrange
     $params = @{

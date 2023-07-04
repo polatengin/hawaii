@@ -4,8 +4,8 @@
   # arrange
   $rgName = "rg-hawaii-${env:buildId}"
   $aksName  = "aks-hawaii-${env:buildId}"
+  $location = "${env:location}"
   $nodePoolName   = "nodepoolbenchpresstest"
-  $location = "${location}"
 
   # log
   Write-Host "Running AKS Cluster Tests for {buildId: $env:buildId}, {rgName: $rgName}, {aksName: $aksName}, {nodePoolName: $nodePoolName}, {location: $location}"

@@ -1,13 +1,13 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $rgName = 'rg-test'
-  $oiwName = 'oiwName'
-  $noOiwName = 'noOiwName'
-  $location = 'westus3'
+  $rgName = "rg-hawaii-${env:buildId}"
+  $oiwName = "oiwName"
+  $noOiwName = "noOiwName"
+  $location = "${env:location}"
 }
 
-Describe 'Verify Operational Insights Workspace Exists' {
+Describe "Verify Operational Insights Workspace Exists" {
   It "Should contain the Operational Insights Workspace named $oiwName" {
     # arrange
     $params = @{
@@ -27,7 +27,7 @@ Describe 'Verify Operational Insights Workspace Exists' {
       ResourceType      = "OperationalInsightsWorkspace"
       ResourceGroupName = $rgName
       ResourceName      = $oiwName
-      PropertyKey       = 'Name'
+      PropertyKey       = "Name"
       PropertyValue     = $oiwName
     }
 
@@ -41,7 +41,7 @@ Describe 'Verify Operational Insights Workspace Exists' {
 
   It "Should not contain the Operational Insights Workspace named $noOiwName" {
     # arrange
-    # The '-ErrorAction SilentlyContinue' command suppresses all errors.
+    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     $params = @{

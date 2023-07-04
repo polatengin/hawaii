@@ -1,8 +1,8 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $rgName = 'rg-test'
-  $location = 'westus3'
+  $rgName = "rg-hawaii-${env:buildId}"
+  $location = "${env:location}"
   $gremlinAccountName = "gremlin-account-name"
   $gremlinDatabaseName = "gremlin-db-name"
   $mongoAccountName = "mongodb-account-name"
@@ -13,7 +13,7 @@
   $sqlRoleDefinitionId = "sql-role-definition-id"
 }
 
-Describe 'Cosmos DB Gremlin Database' {
+Describe "Cosmos DB Gremlin Database" {
   It "Should contain the Cosmos DB Account named $gremlinAccountName" {
     Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $gremlinAccountName
   }
@@ -40,7 +40,7 @@ Describe 'Cosmos DB Gremlin Database' {
   }
 
   It "Should not contain the Cosmos DB Gremlin Database named $noGremlinDBName" {
-    # The 'ErrorAction = SilentlyContinue' command suppresses all errors.
+    # The "ErrorAction = SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     # arrange
@@ -68,10 +68,10 @@ Describe 'Cosmos DB Gremlin Database' {
   }
 }
 
-Describe 'Comsos DB Mongo DB Database' {
+Describe "Comsos DB Mongo DB Database" {
   BeforeAll {
-    $noMongoDBAccountName = 'nomdbbenchpresstest'
-    $noMongoDBName = 'nomdatabasebenchpresstest'
+    $noMongoDBAccountName = "nomdbbenchpresstest"
+    $noMongoDBName = "nomdatabasebenchpresstest"
   }
 
   It "Should contain the Cosmos DB Account named $mongoAccountName" {
@@ -80,7 +80,7 @@ Describe 'Comsos DB Mongo DB Database' {
 
   It "Should not contain the Cosmos DB Account named $noMongoDBAccountName" {
     # arrange
-    # The 'ErrorAction = SilentlyContinue' command suppresses all errors.
+    # The "ErrorAction = SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     $params = @{
@@ -117,7 +117,7 @@ Describe 'Comsos DB Mongo DB Database' {
 
   It "Should not contain the Cosmos DB Mongo DB Database named $noMongoDBName" {
     # arrange
-    # The 'ErrorAction = SilentlyContinue' command suppresses all errors.
+    # The "ErrorAction = SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     $params = @{
@@ -144,10 +144,10 @@ Describe 'Comsos DB Mongo DB Database' {
   }
 }
 
-Describe 'Comsos DB SQL Database' {
+Describe "Comsos DB SQL Database" {
   BeforeAll {
-    $noSqlAccountName = 'nosqlbenchpresstest'
-    $noSqlDatabaseName = 'nosqldatabasebenchpresstest'
+    $noSqlAccountName = "nosqlbenchpresstest"
+    $noSqlDatabaseName = "nosqldatabasebenchpresstest"
   }
 
   It "Should contain the Cosmos DB Account named $sqlAccountName" {
@@ -156,7 +156,7 @@ Describe 'Comsos DB SQL Database' {
 
   It "Should not contain the Cosmos DB Account named $noSqlAccountName" {
     # arrange
-    # The 'ErrorAction = SilentlyContinue' command suppresses all errors.
+    # The "ErrorAction = SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     $params = @{
@@ -193,7 +193,7 @@ Describe 'Comsos DB SQL Database' {
 
   It "Should not contain the Cosmos DB SQL Database named $noSqlDatabaseName" {
     # arrange
-    # The 'ErrorAction = SilentlyContinue' command suppresses all errors.
+    # The "ErrorAction = SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     $params = @{
@@ -220,9 +220,9 @@ Describe 'Comsos DB SQL Database' {
   }
 }
 
-Describe 'Comsos DB SQL Role Assignment' {
+Describe "Comsos DB SQL Role Assignment" {
   BeforeAll {
-    $noSqlRoleAssignmentId = 'nosqlroleassignmentbptest'
+    $noSqlRoleAssignmentId = "nosqlroleassignmentbptest"
   }
 
   It "Should contain the Cosmos DB SQL Role assignment named $sqlRoleAssignmentId" {
@@ -239,7 +239,7 @@ Describe 'Comsos DB SQL Role Assignment' {
 
   It "Should not contain the Cosmos DB SQL Role assignment named $noSqlRoleAssignmentId" {
     # arrange
-    # The 'ErrorAction = SilentlyContinue' command suppresses all errors.
+    # The "ErrorAction = SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     $params = @{

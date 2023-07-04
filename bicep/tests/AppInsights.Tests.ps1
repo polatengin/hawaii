@@ -2,17 +2,17 @@
   Import-Module Az.InfrastructureTesting
 
   # arrange
-  $rgName = 'rg-test'
-  $appInsightsName = 'appinsightstest'
-  $location = 'westus3'
-  $diagnosticSettingName = 'diagnosticsettingtest'
+  $rgName = "rg-hawaii-${env:buildId}"
+  $appInsightsName = "appinsightstest"
+  $location = "${env:location}"
+  $diagnosticSettingName = "diagnosticsettingtest"
   $resourceId = "path/for/resourceId"
 
   # log
   Write-Host "Running AppInsights Tests for {rgName: $rgName}, {appInsightsName: $appInsightsName}, {location: $location}, {diagnosticSettingName: $diagnosticSettingName}, {resourceId: $resourceId}"
 }
 
-Describe 'Verify Application Insights' {
+Describe "Verify Application Insights" {
   It "Should contain the Application Insights" {
     # act
     $result = Confirm-AzBPAppInsights -ResourceGroupName $rgName -Name $appInsightsName
@@ -38,7 +38,7 @@ Describe 'Verify Application Insights' {
   }
 }
 
-Describe 'Verify Diagnostic Setting' {
+Describe "Verify Diagnostic Setting" {
   It "Should contain the Diagnostic Setting" {
     # act
     $result = Confirm-AzBPDiagnosticSetting -ResourceId $ResourceId -Name $diagnosticSettingName

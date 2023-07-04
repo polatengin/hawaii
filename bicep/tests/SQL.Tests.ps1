@@ -1,14 +1,14 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $rgName = 'rg-test'
-  $location = 'westus3'
-  $serverName = 'samplesqlserver'
-  $noDatabaseName = 'nosamplesqlserver'
-  $databaseName = 'samplesqldatabase'
+  $rgName = "rg-hawaii-${env:buildId}"
+  $location = "${env:location}"
+  $serverName = "samplesqlserver"
+  $noDatabaseName = "nosamplesqlserver"
+  $databaseName = "samplesqldatabase"
 }
 
-Describe 'Verify SQL Database' {
+Describe "Verify SQL Database" {
   It "Should contain the SQL Database named $databaseName" {
     # arrange
     $params = @{
@@ -30,7 +30,7 @@ Describe 'Verify SQL Database' {
       ResourceName      = $databaseName
       ResourceGroupName = $rgName
       ServerName        = $serverName
-      PropertyKey       = 'DatabaseName'
+      PropertyKey       = "DatabaseName"
       PropertyValue     = $databaseName
     }
 
@@ -52,7 +52,7 @@ Describe 'Verify SQL Database' {
 
   It "Should not contain the SQL Database named $noDatabaseName" {
     # arrange
-    # The '-ErrorAction SilentlyContinue' command suppresses all errors.
+    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     $params = @{
@@ -91,9 +91,9 @@ Describe 'Verify SQL Database' {
   }
 }
 
-Describe 'Verify SQL Server' {
+Describe "Verify SQL Server" {
   BeforeAll {
-    $noServerName = 'nosamplesqlserver'
+    $noServerName = "nosamplesqlserver"
   }
 
   It "Should contain the SQL Server named $serverName" {
@@ -115,7 +115,7 @@ Describe 'Verify SQL Server' {
       ResourceType      = "SqlServer"
       ResourceName      = $serverName
       ResourceGroupName = $rgName
-      PropertyKey       = 'ServerName'
+      PropertyKey       = "ServerName"
       PropertyValue     = $serverName
     }
 
@@ -128,7 +128,7 @@ Describe 'Verify SQL Server' {
   }
 
   It "Should not contain the SQL Server named $noServerName" {
-    # The '-ErrorAction SilentlyContinue' command suppresses all errors.
+    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     Confirm-AzBPSqlServer -ResourceGroupName $rgName -ServerName $noServerName -ErrorAction SilentlyContinue

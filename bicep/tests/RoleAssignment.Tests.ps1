@@ -1,17 +1,17 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $principalId = 'sampleappid'
-  $scope = '/subscriptions/id'
-  $roleName = 'Reader'
-  $noRoleName = 'Owner'
+  $principalId = "sampleappid"
+  $scope = "/subscriptions/id"
+  $roleName = "Reader"
+  $noRoleName = "Owner"
 }
 
-Describe 'Verify Role Assignment Exists' {
+Describe "Verify Role Assignment Exists" {
   It "Should contain the Service Principal with $roleName Role" {
     # arrange
     $params = @{
-      ResourceType         = 'RoleAssignment'
+      ResourceType         = "RoleAssignment"
       ServicePrincipalId   = $principalId
       RoleDefinitionName   = $roleName
       Scope                = $scope
@@ -24,11 +24,11 @@ Describe 'Verify Role Assignment Exists' {
   It "Should contain the Service Principal with $roleName Role" {
     # arrange
     $params = @{
-      ResourceType         = 'RoleAssignment'
+      ResourceType         = "RoleAssignment"
       ServicePrincipalId   = $principalId
       RoleDefinitionName   = $roleName
       Scope                = $scope
-      PropertyKey          = 'RoleDefinitionName'
+      PropertyKey          = "RoleDefinitionName"
       PropertyValue        = $roleName
     }
 

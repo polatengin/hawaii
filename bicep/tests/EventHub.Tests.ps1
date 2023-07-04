@@ -1,15 +1,15 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $rgName = 'rg-test'
-  $nameSpaceName = 'eventhubnamespace'
-  $eventHubName = 'eventhub'
-  $location = 'westus3'
+  $rgName = "rg-hawaii-${env:buildId}"
+  $nameSpaceName = "eventhubnamespace"
+  $eventHubName = "eventhub"
+  $location = "${env:location}"
 }
 
-Describe 'Verify Event Hub' {
+Describe "Verify Event Hub" {
   BeforeAll {
-    $noEventHub = 'noeventhub'
+    $noEventHub = "noeventhub"
   }
 
   It "Should contain the Event Hub named $eventHubName" {
@@ -32,7 +32,7 @@ Describe 'Verify Event Hub' {
       ResourceGroupName = $rgName
       ResourceName      = $eventHubName
       NamespaceName     = $nameSpaceName
-      PropertyKey       = 'Name'
+      PropertyKey       = "Name"
       PropertyValue     = $eventHubName
     }
 
@@ -77,9 +77,9 @@ Describe 'Verify Event Hub' {
   }
 }
 
-Describe 'Verify Event Hub Namespace' {
+Describe "Verify Event Hub Namespace" {
   BeforeAll {
-    $noNameSpaceName = 'nosamplenamespace'
+    $noNameSpaceName = "nosamplenamespace"
   }
 
   It "Should contain the Event Hub Namespace named $nameSpaceName" {
@@ -100,7 +100,7 @@ Describe 'Verify Event Hub Namespace' {
       ResourceType      = "EventHubNamespace"
       ResourceGroupName = $rgName
       ResourceName      = $nameSpaceName
-      PropertyKey       = 'Name'
+      PropertyKey       = "Name"
       PropertyValue     = $nameSpaceName
     }
 
@@ -123,10 +123,10 @@ Describe 'Verify Event Hub Namespace' {
   }
 }
 
-Describe 'Verify Event Hub Consumer Group' {
+Describe "Verify Event Hub Consumer Group" {
   BeforeAll {
-    $consumerGroupName = 'eventhubconsumergroup'
-    $noConsumerGroupName = 'noeventhubconsumergroup'
+    $consumerGroupName = "eventhubconsumergroup"
+    $noConsumerGroupName = "noeventhubconsumergroup"
   }
 
   It "Should contain the Event Hub Consumer Group named $consumerGroupName" {
@@ -151,7 +151,7 @@ Describe 'Verify Event Hub Consumer Group' {
       ResourceName      = $consumerGroupName
       NamespaceName     = $nameSpaceName
       EventHubName      = $eventHubName
-      PropertyKey       = 'Name'
+      PropertyKey       = "Name"
       PropertyValue     = $consumerGroupName
     }
 

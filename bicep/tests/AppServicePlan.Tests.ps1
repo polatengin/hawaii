@@ -2,15 +2,15 @@
   Import-Module Az.InfrastructureTesting
 
   # arrange
-  $rgName = 'rg-test'
-  $appServicePlanName = 'appserviceplantest'
-  $location = 'westus3'
+  $rgName = "rg-hawaii-${env:buildId}"
+  $appServicePlanName = "appserviceplantest"
+  $location = "${env:location}"
 
   # log
   Write-Host "Running App Service Plan Tests for {rgName: $rgName}, {appServicePlanName: $appServicePlanName}, {location: $location}"
 }
 
-Describe 'Verify App Service Plan' {
+Describe "Verify App Service Plan" {
   It "Should contain the App Service Plan" {
     # act
     $result = Confirm-AzBPAppServicePlan -ResourceGroupName $rgName -AppServicePlanName $appServicePlanName

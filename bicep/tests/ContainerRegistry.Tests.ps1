@@ -2,15 +2,15 @@
   Import-Module Az.InfrastructureTesting
 
   # arrange
-  $rgName                  = 'rg-test'
-  $acrName                 = 'acrbenchpresstest'
-  $location                = 'westus3'
+  $rgName                  = "rg-test"
+  $acrName                 = "acrbenchpresstest"
+  $location                = "westus3"
 
   # log
   Write-Host "Running Container Registry Tests for {rgName: $rgName}, {acrName: $acrName}, {location: $location}"
 }
 
-Describe 'Verify Container Registry' {
+Describe "Verify Container Registry" {
   It "Should contain the Container Registry" {
     # act
     $result = Confirm-AzBPContainerRegistry -ResourceGroupName $rgName -Name $acrName

@@ -1,14 +1,14 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $rgName = 'rg-test'
-  $workSpaceName = 'samplesynws'
-  $location = 'westus3'
+  $rgName = "rg-hawaii-${env:buildId}"
+  $workSpaceName = "samplesynws"
+  $location = "${env:location}"
 }
 
-Describe 'Verify Synapse Workspace' {
+Describe "Verify Synapse Workspace" {
   BeforeAll {
-    $noWorkspaceName = 'nosamplesynws'
+    $noWorkspaceName = "nosamplesynws"
   }
 
   It "Should contain the Synapse Workspace named $workSpaceName" {
@@ -29,7 +29,7 @@ Describe 'Verify Synapse Workspace' {
       ResourceType      = "SynapseWorkspace"
       ResourceGroupName = $rgName
       ResourceName      = $workSpaceName
-      PropertyKey       = 'Name'
+      PropertyKey       = "Name"
       PropertyValue     = $workSpaceName
     }
 
@@ -53,13 +53,13 @@ Describe 'Verify Synapse Workspace' {
 
   It "Should not contain the Synapse Workspace named $noWorkspaceName" {
     # arrange
-    # The '-ErrorAction SilentlyContinue' command suppresses all errors.
+    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     $params = @{
       ResourceGroupName = $rgName
       WorkspaceName     = $noWorkspaceName
-      ErrorAction       = 'SilentlyContinue'
+      ErrorAction       = "SilentlyContinue"
     }
 
     # act and assert
@@ -67,10 +67,10 @@ Describe 'Verify Synapse Workspace' {
   }
 }
 
-Describe 'Verify Synapse Spark/SQL Pool' {
+Describe "Verify Synapse Spark/SQL Pool" {
   BeforeAll {
-    $sparkPoolName = 'samplespark'
-    $sqlPoolName = 'samplesql'
+    $sparkPoolName = "samplespark"
+    $sqlPoolName = "samplesql"
   }
 
   It "Should contain the Synapse Spark Pool named $sparkPoolName" {
@@ -93,7 +93,7 @@ Describe 'Verify Synapse Spark/SQL Pool' {
       ResourceGroupName = $rgName
       WorkspaceName     = $workSpaceName
       ResourceName      = $sparkPoolName
-      PropertyKey       = 'Name'
+      PropertyKey       = "Name"
       PropertyValue     = $sparkPoolName
     }
 
@@ -158,7 +158,7 @@ Describe 'Verify Synapse Spark/SQL Pool' {
       ResourceGroupName = $rgName
       WorkspaceName     = $workSpaceName
       ResourceName      = $sqlPoolName
-      PropertyKey       = 'Name'
+      PropertyKey       = "Name"
       PropertyValue     = $sqlPoolName
     }
 

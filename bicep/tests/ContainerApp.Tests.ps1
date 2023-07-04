@@ -2,16 +2,16 @@
   Import-Module Az.InfrastructureTesting
 
   # arrange
-  $rgName   = 'rg-test'
-  $location = 'westus3'
-  $containerAppName   = 'containerAppBenchPressTest'
-  $managedEnvName   = 'managedenvbenchpresstest'
+  $rgName = "rg-hawaii-${env:buildId}"
+  $location = "${env:location}"
+  $containerAppName   = "containerAppBenchPressTest"
+  $managedEnvName   = "managedenvbenchpresstest"
 
   # log
   Write-Host "Running Container Application Tests for {rgName: $rgName}, {location: $location}, {containerAppName: $containerAppName}, {managedEnvName: $managedEnvName}"
 }
 
-Describe 'Verify Container Application' {
+Describe "Verify Container Application" {
   It "Should contain the Container Application" {
     # act
     $result = Confirm-AzBPContainerApp -ResourceGroupName $rgName -Name $containerAppName
@@ -37,7 +37,7 @@ Describe 'Verify Container Application' {
   }
 }
 
-Describe 'Verify Container Application Managed Environment' {
+Describe "Verify Container Application Managed Environment" {
   It "Should contain the Container Application" {
     # act
     $result = Confirm-AzBPContainerAppManagedEnv -ResourceGroupName $rgName -Name $managedEnvName

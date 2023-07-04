@@ -1,12 +1,12 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $rgName = 'rg-test'
-  $noRgName = 'notestrg'
-  $location = 'westus3'
+  $rgName = "rg-hawaii-${env:buildId}"
+  $noRgName = "notestrg"
+  $location = "${env:location}"
 }
 
-Describe 'Verify Resource Group Exists' {
+Describe "Verify Resource Group Exists" {
   It "Should contain the Resource Group named $rgName" {
     # arrange
     $params = @{
@@ -24,7 +24,7 @@ Describe 'Verify Resource Group Exists' {
     $params = @{
       ResourceType      = "ResourceGroup"
       ResourceName      = $rgName
-      PropertyKey       = 'ResourceGroupName'
+      PropertyKey       = "ResourceGroupName"
       PropertyValue     = $rgName
     }
 
@@ -37,7 +37,7 @@ Describe 'Verify Resource Group Exists' {
   }
 
   It "Should not contain the Resource Group named $noRgName" {
-    # The '-ErrorAction SilentlyContinue' command suppresses all errors.
+    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     Confirm-AzBPResourceGroup -ResourceGroupName $noRgName -ErrorAction SilentlyContinue | Should -Not -BeSuccessful

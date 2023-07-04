@@ -1,14 +1,14 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $rgName = 'rg-test'
-  $accountName = 'azbenchpressstorage'
-  $location = 'westus3'
+  $rgName = "rg-hawaii-${env:buildId}"
+  $accountName = "azbenchpressstorage"
+  $location = "${env:location}"
 }
 
-Describe 'Verify Storage Account' {
+Describe "Verify Storage Account" {
   BeforeAll {
-    $noAccountName = 'noazbenchpressstorage'
+    $noAccountName = "noazbenchpressstorage"
   }
 
   It "Should contain the Storage Account named $accountName" {
@@ -29,7 +29,7 @@ Describe 'Verify Storage Account' {
       ResourceType      = "StorageAccount"
       ResourceGroupName = $rgName
       ResourceName      = $accountName
-      PropertyKey       = 'StorageAccountName'
+      PropertyKey       = "StorageAccountName"
       PropertyValue     = $accountName
     }
 
@@ -42,7 +42,7 @@ Describe 'Verify Storage Account' {
   }
 
   It "Should not contain the Storage Account named $noAccountName" {
-    # The '-ErrorAction SilentlyContinue' command suppresses all errors.
+    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     Confirm-AzBPStorageAccount -ResourceGroupName $rgName -Name $noAccountName -ErrorAction SilentlyContinue
@@ -58,10 +58,10 @@ Describe 'Verify Storage Account' {
   }
 }
 
-Describe 'Verify Storage Container' {
+Describe "Verify Storage Container" {
   BeforeAll {
-    $containerName = 'azbenchpresscontainer'
-    $noContainerName = 'noazbenchpresscontainer'
+    $containerName = "azbenchpresscontainer"
+    $noContainerName = "noazbenchpresscontainer"
   }
 
   It "Should contain the Storage Container named $containerName" {
@@ -84,7 +84,7 @@ Describe 'Verify Storage Container' {
       ResourceGroupName = $rgName
       AccountName       = $accountName
       ResourceName      = $containerName
-      PropertyKey       = 'Name'
+      PropertyKey       = "Name"
       PropertyValue     = $containerName
     }
 
@@ -106,7 +106,7 @@ Describe 'Verify Storage Container' {
 
   It "Should not contain the Storage Container named $noContainerName" {
     # arrange
-    # The '-ErrorAction SilentlyContinue' command suppresses all errors.
+    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     $params = @{

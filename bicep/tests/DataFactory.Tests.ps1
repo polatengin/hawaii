@@ -1,14 +1,14 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $rgName = 'rg-test'
-  $dataFactoryName = 'sampleadf'
-  $location = 'westus3'
+  $rgName = "rg-hawaii-${env:buildId}"
+  $dataFactoryName = "sampleadf"
+  $location = "${env:location}"
 }
 
-Describe 'Verify Data Factory' {
+Describe "Verify Data Factory" {
   BeforeAll {
-    $noDataFactoryName = 'nosampleadf'
+    $noDataFactoryName = "nosampleadf"
   }
 
   It "Should contain the Data Factory named $dataFactoryName" {
@@ -29,7 +29,7 @@ Describe 'Verify Data Factory' {
       ResourceType      = "DataFactory"
       ResourceGroupName = $rgName
       ResourceName      = $dataFactoryName
-      PropertyKey       = 'DataFactoryName'
+      PropertyKey       = "DataFactoryName"
       PropertyValue     = $dataFactoryName
     }
 
@@ -42,7 +42,7 @@ Describe 'Verify Data Factory' {
   }
 
   It "Should not contain the Data Factory named $noDataFactoryName" {
-    # The '-ErrorAction SilentlyContinue' command suppresses all errors.
+    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     Confirm-AzBPDataFactory -ResourceGroupName $rgName -Name $noDataFactoryName -ErrorAction SilentlyContinue
@@ -58,15 +58,15 @@ Describe 'Verify Data Factory' {
   }
 }
 
-Describe 'Verify Data Factory Linked Service' {
+Describe "Verify Data Factory Linked Service" {
   BeforeAll {
-    $linkedServiceName = 'BenchpressStorageLinkedService'
+    $linkedServiceName = "BenchpressStorageLinkedService"
   }
 
   It "Should contain the Data Factory with a Linked Service named $linkedServiceName" {
     # arrange
     $params = @{
-      ResourceType      = 'DataFactoryLinkedService'
+      ResourceType      = "DataFactoryLinkedService"
       ResourceGroupName = $rgName
       DataFactoryName   = $dataFactoryName
       ResourceName      = $linkedServiceName
@@ -79,11 +79,11 @@ Describe 'Verify Data Factory Linked Service' {
   It "Should contain the Data Factory with a Linked Service named $linkedServiceName" {
     # arrange
     $params = @{
-      ResourceType      = 'DataFactoryLinkedService'
+      ResourceType      = "DataFactoryLinkedService"
       ResourceGroupName = $rgName
       DataFactoryName   = $dataFactoryName
       ResourceName      = $linkedServiceName
-      PropertyKey       = 'Name'
+      PropertyKey       = "Name"
       PropertyValue     = $linkedServiceName
     }
 

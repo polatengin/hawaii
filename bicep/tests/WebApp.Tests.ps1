@@ -1,13 +1,13 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $rgName = 'rg-test'
-  $webappName = 'azbpwebapptest'
-  $noWebAppName = 'noazbpwebapptest'
-  $location = 'westus3'
+  $rgName = "rg-hawaii-${env:buildId}"
+  $webappName = "azbpwebapptest"
+  $noWebAppName = "noazbpwebapptest"
+  $location = "${env:location}"
 }
 
-Describe 'Verify Web App Exists' {
+Describe "Verify Web App Exists" {
   It "Should contain the Web App named $webappName" {
     # arrange
     $params = @{
@@ -26,7 +26,7 @@ Describe 'Verify Web App Exists' {
       ResourceType      = "WebApp"
       ResourceGroupName = $rgName
       ResourceName      = $webappName
-      PropertyKey       = 'Name'
+      PropertyKey       = "Name"
       PropertyValue     = $webappName
     }
 
@@ -40,7 +40,7 @@ Describe 'Verify Web App Exists' {
 
   It "Should not contain the Web App named $noWebappName" {
     #arrange
-    # The '-ErrorAction SilentlyContinue' command suppresses all errors.
+    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     Confirm-AzBPWebApp -ResourceGroupName $rgName -WebAppName $noWebappName -ErrorAction SilentlyContinue
@@ -56,9 +56,9 @@ Describe 'Verify Web App Exists' {
   }
 }
 
-Describe 'Verify Web App Config'{
+Describe "Verify Web App Config"{
   BeforeAll{
-    $appInsightsSettingName = 'APPLICATIONINSIGHTS_CONNECTION_STRING'
+    $appInsightsSettingName = "APPLICATIONINSIGHTS_CONNECTION_STRING"
   }
 
   It "Should contain the App Setting named $appInsightsSettingName" {
@@ -67,7 +67,7 @@ Describe 'Verify Web App Config'{
       ResourceType      = "WebApp"
       ResourceGroupName = $rgName
       ResourceName      = $webappName
-      PropertyKey       = 'SiteConfig.AppSettings[1].Name'
+      PropertyKey       = "SiteConfig.AppSettings[1].Name"
       PropertyValue     = $appInsightsSettingName
     }
 
@@ -76,10 +76,10 @@ Describe 'Verify Web App Config'{
   }
 }
 
-Describe 'Verify Web App Static Site Exists' {
+Describe "Verify Web App Static Site Exists" {
   BeforeAll {
-    $webappStaticSiteName = 'staticwebapptest'
-    $noWebAppStaticSiteName = 'nostaticwebapptest'
+    $webappStaticSiteName = "staticwebapptest"
+    $noWebAppStaticSiteName = "nostaticwebapptest"
   }
 
   It "Should contain the Web App named $webappStaticSiteName" {
@@ -100,7 +100,7 @@ Describe 'Verify Web App Static Site Exists' {
       ResourceType      = "WebAppStaticSite"
       ResourceGroupName = $rgName
       ResourceName      = $webappStaticSiteName
-      PropertyKey       = 'Name'
+      PropertyKey       = "Name"
       PropertyValue     = $webappStaticSiteName
     }
 
@@ -115,7 +115,7 @@ Describe 'Verify Web App Static Site Exists' {
 
   It "Should not contain the Web App named $nowebappStaticSiteName" {
     # arrange
-    # The '-ErrorAction SilentlyContinue' command suppresses all errors.
+    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     $params = @{

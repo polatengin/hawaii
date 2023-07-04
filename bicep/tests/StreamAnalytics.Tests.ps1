@@ -1,13 +1,13 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $rgName = 'rg-test'
-  $location = 'westus3'
+  $rgName = "rg-hawaii-${env:buildId}"
+  $location = "${env:location}"
 }
 
-Describe 'Verify Stream Analytics Cluster' {
+Describe "Verify Stream Analytics Cluster" {
   BeforeAll {
-    $clusterName = 'teststreamcluster'
+    $clusterName = "teststreamcluster"
   }
 
   It "Should contain the Stream Analytics Cluster named $clusterName" {
@@ -28,7 +28,7 @@ Describe 'Verify Stream Analytics Cluster' {
       ResourceType      = "StreamAnalyticsCluster"
       ResourceGroupName = $rgName
       ResourceName      = $clusterName
-      PropertyKey       = 'Name'
+      PropertyKey       = "Name"
       PropertyValue     = $clusterName
     }
 
@@ -50,13 +50,13 @@ Describe 'Verify Stream Analytics Cluster' {
   }
 }
 
-Describe 'Stream Analytics Jobs' {
+Describe "Stream Analytics Jobs" {
   BeforeAll {
-    $jobName = 'testjob'
-    $functionName = 'testfunction'
-    $inputName = 'testinput'
-    $outputName = 'testoutput'
-    $transformationName = 'testtransformation'
+    $jobName = "testjob"
+    $functionName = "testfunction"
+    $inputName = "testinput"
+    $outputName = "testoutput"
+    $transformationName = "testtransformation"
   }
 
   It "Should contain the Stream Analytics Job named $jobName" {
@@ -77,7 +77,7 @@ Describe 'Stream Analytics Jobs' {
       ResourceType      = "StreamAnalyticsJob"
       ResourceGroupName = $rgName
       ResourceName      = $jobName
-      PropertyKey       = 'Name'
+      PropertyKey       = "Name"
       PropertyValue     = $jobName
     }
 
@@ -119,7 +119,7 @@ Describe 'Stream Analytics Jobs' {
       ResourceGroupName = $rgName
       JobName           = $jobName
       ResourceName      = $functionName
-      PropertyKey       = 'Name'
+      PropertyKey       = "Name"
       PropertyValue     = $functionName
     }
 
@@ -173,7 +173,7 @@ Describe 'Stream Analytics Jobs' {
       ResourceGroupName = $rgName
       JobName           = $jobName
       ResourceName      = $inputName
-      PropertyKey       = 'Name'
+      PropertyKey       = "Name"
       PropertyValue     = $inputName
     }
 
@@ -227,7 +227,7 @@ Describe 'Stream Analytics Jobs' {
       ResourceGroupName = $rgName
       JobName           = $jobName
       ResourceName      = $outputName
-      PropertyKey       = 'Name'
+      PropertyKey       = "Name"
       PropertyValue     = $outputName
     }
 
@@ -281,7 +281,7 @@ Describe 'Stream Analytics Jobs' {
       ResourceGroupName = $rgName
       JobName           = $jobName
       ResourceName      = $transformationName
-      PropertyKey       = 'Name'
+      PropertyKey       = "Name"
       PropertyValue     = $transformationName
     }
 

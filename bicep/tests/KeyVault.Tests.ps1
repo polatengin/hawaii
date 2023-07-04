@@ -1,17 +1,17 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $rgName = 'rg-test'
-  $kvName = 'kvbenchpresstest'
-  $noKvName = 'nokvbenchpresstest'
-  $kvKeyName = 'samplekey'
-  $kvSecretName = 'samplesecret'
-  $kvCertificateName = 'samplecert'
-  $kvAccessPolicyObjectId = 'svcprinoid'
-  $location = 'westus3'
+  $rgName = "rg-hawaii-${env:buildId}"
+  $kvName = "kvbenchpresstest"
+  $noKvName = "nokvbenchpresstest"
+  $kvKeyName = "samplekey"
+  $kvSecretName = "samplesecret"
+  $kvCertificateName = "samplecert"
+  $kvAccessPolicyObjectId = "svcprinoid"
+  $location = "${env:location}"
 }
 
-Describe 'Verify Key Vault' {
+Describe "Verify Key Vault" {
   It "Should contain the Key Vault named $kvName" {
     # arrange
     $params = @{
@@ -31,7 +31,7 @@ Describe 'Verify Key Vault' {
       ResourceType      = "KeyVault"
       ResourceGroupName = $rgName
       ResourceName      = $kvName
-      PropertyKey       = 'AccessPolicies[0].ObjectId'
+      PropertyKey       = "AccessPolicies[0].ObjectId"
       PropertyValue     = $kvAccessPolicyObjectId
     }
 
@@ -52,7 +52,7 @@ Describe 'Verify Key Vault' {
   }
 
   It "Should not contain the Key Vault named $noKvName" {
-    # The '-ErrorAction SilentlyContinue' command suppresses all errors.
+    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     Confirm-AzBPKeyVault -ResourceGroupName $rgName -Name $noKvName -ErrorAction SilentlyContinue

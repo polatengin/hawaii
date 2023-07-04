@@ -1,13 +1,13 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $rgName = 'rg-test'
-  $vmName = 'simpleLinuxVM1'
-  $noVmName = 'noSimpleLinuxVM1'
-  $location = 'westus3'
+  $rgName = "rg-hawaii-${env:buildId}"
+  $vmName = "simpleLinuxVM1"
+  $noVmName = "noSimpleLinuxVM1"
+  $location = "${env:location}"
 }
 
-Describe 'Verify Virtual Machine' {
+Describe "Verify Virtual Machine" {
   It "Should contain the Virtual Machine named $vmName" {
     # arrange
     $params = @{
@@ -26,7 +26,7 @@ Describe 'Verify Virtual Machine' {
       ResourceType      = "VirtualMachine"
       ResourceGroupName = $rgName
       ResourceName      = $vmName
-      PropertyKey       = 'Name'
+      PropertyKey       = "Name"
       PropertyValue     = $vmName
     }
 
@@ -40,7 +40,7 @@ Describe 'Verify Virtual Machine' {
 
   It "Should not contain the Virtual Machine named $noVmName" {
     # arrange
-    # The '-ErrorAction SilentlyContinue' command suppresses all errors.
+    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
     $params = @{
