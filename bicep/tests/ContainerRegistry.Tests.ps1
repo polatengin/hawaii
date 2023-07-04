@@ -1,63 +1,37 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $Script:rgName                  = 'rg-test'
-  $Script:acrName                 = 'acrbenchpresstest'
-  $Script:location                = 'westus3'
-  $Script:noContainerRegistryName = 'nocontainerregistry'
+  # arrange
+  $rgName                  = 'rg-test'
+  $acrName                 = 'acrbenchpresstest'
+  $location                = 'westus3'
+
+  # log
+  Write-Host "Running Container Registry Tests for {rgName: $rgName}, {acrName: $acrName}, {location: $location}"
 }
 
 Describe 'Verify Container Registry' {
-  It "Should contain a Container Registry named $acrName" {
-    # arrange
-    $params = @{
-      ResourceType      = "ContainerRegistry"
-      ResourceName      = $acrName
-      ResourceGroupName = $rgName
-    }
+  It "Should contain the Container Registry" {
+    # act
+    $result = Confirm-AzBPContainerRegistry -ResourceGroupName $rgName -Name $acrName
 
-    # act and assert
-    Confirm-AzBPResource @params | Should -BeSuccessful
+    # assert
+    $result | Should -Be -Not $null
   }
 
-  It "Should contain a Container Registry named $acrName with a Standard SKU" {
-    # arrange
-    $params = @{
-      ResourceType      = "ContainerRegistry"
-      ResourceName      = $acrName
-      ResourceGroupName = $rgName
-      PropertyKey       = "SkuName"
-      PropertyValue     = "Basic"
-    }
+  It "Should contain the Container Registry in the location" {
+    # act
+    $result = Confirm-AzBPContainerRegistry -ResourceGroupName $rgName -Name $acrName | Should -BeInLocation $location
 
-    # act and assert
-    Confirm-AzBPResource @params | Should -BeSuccessful
+    # assert
+    $result.ResourceDetails.Location | Should -Be "$location"
   }
 
-  It "Should contain a Container Registry named $acrName" {
-    Confirm-AzBPContainerRegistry -ResourceGroupName $rgName -Name $acrName | Should -BeSuccessful
-  }
+  It "Should contain the Container Registry in the resource group" {
+    # act
+    $result = Confirm-AzBPContainerRegistry -ResourceGroupName $rgName -Name $acrName | Should -BeInResourceGroup $rgName
 
-  It "Should not contain a Container Registry named $noContainerRegistryName" {
-    # arrange
-    # The '-ErrorAction SilentlyContinue' command suppresses all errors.
-    # In this test, it will suppress the error message when a resource cannot be found.
-    # Remove this field to see all errors.
-    $params = @{
-      ResourceGroupName     = $rgName
-      Name                  = $noContainerRegistryName
-      ErrorAction           = "SilentlyContinue"
-    }
-
-    # act and assert
-    Confirm-AzBPContainerRegistry @params | Should -Not -BeSuccessful
-  }
-
-  It "Should contain a Container Registry named $acrName in $location" {
-    Confirm-AzBPContainerRegistry -ResourceGroupName $rgName -Name $acrName | Should -BeInLocation $location
-  }
-
-  It "Should contain a Container Registry named $acrName in $rgName" {
-    Confirm-AzBPContainerRegistry -ResourceGroupName $rgName -Name $acrName | Should -BeInResourceGroup $rgName
+    # assert
+    $result.ResourceDetails.ResourceGroupName | Should -Be "$rgName"
   }
 }

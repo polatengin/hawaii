@@ -1,11 +1,13 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
+  # arrange
   $rgName = "rg-hawaii-${env:buildId}"
   $actionGroupName = "aghawaii${env:buildId}"
   $location = "global"
   $emailReceiverAddress = "sampleactiongroup@contoso.com"
 
+  # log
   Write-Host "Running Action Group Tests for {buildId: $env:buildId}, {rgName: $rgName}, {actionGroupName: $actionGroupName}, {location: $location}, {emailReceiverAddress: $emailReceiverAddress}"
 }
 
@@ -13,8 +15,6 @@ Describe "Verify Action Group" {
   It "Should contain the Action Group" {
     # act
     $result = Confirm-AzBPActionGroup -ResourceGroupName $rgName -ActionGroupName $actionGroupName
-
-    Write-Host ($result.ResourceDetails | ConvertTo-Json -Depth 100)
 
     # assert
     $result | Should -Be -Not $null
@@ -44,11 +44,19 @@ Describe "Verify Action Group" {
     $result.ResourceDetails.EmailReceivers.Length | Should -Be 1
   }
 
-  It "Should contain the Action Group with the correct email receivers" {
+  It "Should contain the Action Group with the correct email receiver" {
     # act
     $result = Confirm-AzBPActionGroup -ResourceGroupName $rgName -ActionGroupName $actionGroupName
 
     # assert
     $result.ResourceDetails.EmailReceivers[0].EmailAddress | Should -Be "$emailReceiverAddress"
+  }
+
+  It "Should contain the Action Group with the correct email receiver status enabled" {
+    # act
+    $result = Confirm-AzBPActionGroup -ResourceGroupName $rgName -ActionGroupName $actionGroupName
+
+    # assert
+    $result.ResourceDetails.EmailReceivers[0].Status | Should -Be 1
   }
 }

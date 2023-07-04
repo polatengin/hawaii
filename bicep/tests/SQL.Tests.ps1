@@ -1,15 +1,15 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $Script:rgName = 'rg-test'
-  $Script:location = 'westus3'
-  $Script:serverName = 'samplesqlserver'
-  $Script:noDatabaseName = 'nosamplesqlserver'
-  $Script:databaseName = 'samplesqldatabase'
+  $rgName = 'rg-test'
+  $location = 'westus3'
+  $serverName = 'samplesqlserver'
+  $noDatabaseName = 'nosamplesqlserver'
+  $databaseName = 'samplesqldatabase'
 }
 
 Describe 'Verify SQL Database' {
-  It "Should contain a SQL Database named $databaseName" {
+  It "Should contain the SQL Database named $databaseName" {
     # arrange
     $params = @{
       ResourceType      = "SqlDatabase"
@@ -23,7 +23,7 @@ Describe 'Verify SQL Database' {
   }
 
 
-  It "Should contain a SQL Database named $databaseName" {
+  It "Should contain the SQL Database named $databaseName" {
     # arrange
     $params = @{
       ResourceType      = "SqlDatabase"
@@ -38,7 +38,7 @@ Describe 'Verify SQL Database' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a SQL Database named $databaseName" {
+  It "Should contain the SQL Database named $databaseName" {
     # arrange
     $params = @{
       ResourceGroupName = $rgName
@@ -50,7 +50,7 @@ Describe 'Verify SQL Database' {
     Confirm-AzBPSqlDatabase @params | Should -BeSuccessful
   }
 
-  It "Should not contain a SQL Database named $noDatabaseName" {
+  It "Should not contain the SQL Database named $noDatabaseName" {
     # arrange
     # The '-ErrorAction SilentlyContinue' command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
@@ -66,7 +66,7 @@ Describe 'Verify SQL Database' {
     Confirm-AzBPSqlDatabase @params | Should -Not -BeSuccessful
   }
 
-  It "Should contain a SQL Database named $databaseName in $location" {
+  It "Should contain the SQL Database named $databaseName in the location" {
     # arrange
     $params = @{
       ResourceGroupName = $rgName
@@ -78,7 +78,7 @@ Describe 'Verify SQL Database' {
     Confirm-AzBPSqlDatabase @params | Should -BeInLocation $location
   }
 
-  It "Should contain a SQL Database named $databaseName in $rgName" {
+  It "Should contain the SQL Database named $databaseName in the resource group" {
     # arrange
     $params = @{
       ResourceGroupName = $rgName
@@ -93,10 +93,10 @@ Describe 'Verify SQL Database' {
 
 Describe 'Verify SQL Server' {
   BeforeAll {
-    $Script:noServerName = 'nosamplesqlserver'
+    $noServerName = 'nosamplesqlserver'
   }
 
-  It "Should contain a SQL Server named $serverName" {
+  It "Should contain the SQL Server named $serverName" {
     # arrange
     $params = @{
       ResourceType      = "SqlServer"
@@ -109,7 +109,7 @@ Describe 'Verify SQL Server' {
   }
 
 
-  It "Should contain a SQL Server named $serverName" {
+  It "Should contain the SQL Server named $serverName" {
     # arrange
     $params = @{
       ResourceType      = "SqlServer"
@@ -123,11 +123,11 @@ Describe 'Verify SQL Server' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a SQL Server named $serverName" {
+  It "Should contain the SQL Server named $serverName" {
     Confirm-AzBPSqlServer -ResourceGroupName $rgName -ServerName $serverName | Should -BeSuccessful
   }
 
-  It "Should not contain a SQL Server named $noServerName" {
+  It "Should not contain the SQL Server named $noServerName" {
     # The '-ErrorAction SilentlyContinue' command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
     # Remove this field to see all errors.
@@ -135,11 +135,11 @@ Describe 'Verify SQL Server' {
     | Should -Not -BeSuccessful
   }
 
-  It "Should contain a SQL Server named $serverName in $location" {
+  It "Should contain the SQL Server named $serverName in the location" {
     Confirm-AzBPSqlServer -ResourceGroupName $rgName -ServerName $serverName | Should -BeInLocation $location
   }
 
-  It "Should contain a SQL Server named $serverName in $rgName" {
+  It "Should contain the SQL Server named $serverName in the resource group" {
     Confirm-AzBPSqlServer -ResourceGroupName $rgName -ServerName $serverName | Should -BeInResourceGroup $rgName
   }
 }

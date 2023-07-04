@@ -1,13 +1,13 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $Script:rgName   = 'rg-test'
-  $Script:location = 'westus3'
-  $Script:dashboardName = 'sampleDashboard'
+  $rgName   = 'rg-test'
+  $location = 'westus3'
+  $dashboardName = 'sampleDashboard'
 }
 
 Describe 'Verify Dashboard' {
-  It "Should contain a Dashboard named $dashboardName" {
+  It "Should contain the Dashboard named $dashboardName" {
     # arrange
     $params = @{
       ResourceType      = "PortalDashboard"
@@ -19,7 +19,7 @@ Describe 'Verify Dashboard' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Dashboard named $dashboardName" {
+  It "Should contain the Dashboard named $dashboardName" {
     # arrange
     $params = @{
       ResourceType      = "PortalDashboard"
@@ -33,15 +33,15 @@ Describe 'Verify Dashboard' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Dashboard named $dashboardName" {
+  It "Should contain the Dashboard named $dashboardName" {
     Confirm-AzBPPortalDashboard -ResourceGroupName $rgName -Name $dashboardName | Should -BeSuccessful
   }
 
-  It "Should contain a Dashboard named $dashboardName in $location" {
+  It "Should contain the Dashboard named $dashboardName in the location" {
     Confirm-AzBPPortalDashboard -ResourceGroupName $rgName -Name $dashboardName | Should -BeInLocation $location
   }
 
-  It "Should contain a Dashboard named $dashboardName in $rgName" {
+  It "Should contain the Dashboard named $dashboardName in the resource group" {
     Confirm-AzBPPortalDashboard -ResourceGroupName $rgName -Name $dashboardName | Should -BeInResourceGroup $rgName
   }
 }

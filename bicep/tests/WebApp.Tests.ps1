@@ -1,14 +1,14 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $Script:rgName = 'rg-test'
-  $Script:webappName = 'azbpwebapptest'
-  $Script:noWebAppName = 'noazbpwebapptest'
-  $Script:location = 'westus3'
+  $rgName = 'rg-test'
+  $webappName = 'azbpwebapptest'
+  $noWebAppName = 'noazbpwebapptest'
+  $location = 'westus3'
 }
 
 Describe 'Verify Web App Exists' {
-  It "Should contain a Web App named $webappName" {
+  It "Should contain the Web App named $webappName" {
     # arrange
     $params = @{
       ResourceType      = "WebApp"
@@ -20,7 +20,7 @@ Describe 'Verify Web App Exists' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Web App named $webappName - ConfirmAzBPResource" {
+  It "Should contain the Web App named $webappName - ConfirmAzBPResource" {
     # arrange
     $params = @{
       ResourceType      = "WebApp"
@@ -34,11 +34,11 @@ Describe 'Verify Web App Exists' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Web App named $webappName" {
+  It "Should contain the Web App named $webappName" {
     Confirm-AzBPWebApp -ResourceGroupName $rgName -WebAppName $webappName | Should -BeSuccessful
   }
 
-  It "Should not contain a Web App named $noWebappName" {
+  It "Should not contain the Web App named $noWebappName" {
     #arrange
     # The '-ErrorAction SilentlyContinue' command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
@@ -47,21 +47,21 @@ Describe 'Verify Web App Exists' {
     | Should -Not -BeSuccessful
   }
 
-  It "Should contain a Web App named $webappName in $location" {
+  It "Should contain the Web App named $webappName in the location" {
     Confirm-AzBPWebApp -ResourceGroupName $rgName -WebAppName $webappName | Should -BeInLocation $location
   }
 
-  It "Should contain a Web App named $webappName in $rgName" {
+  It "Should contain the Web App named $webappName in the resource group" {
     Confirm-AzBPWebApp -ResourceGroupName $rgName -WebAppName $webappName | Should -BeInResourceGroup $rgName
   }
 }
 
 Describe 'Verify Web App Config'{
   BeforeAll{
-    $Script:appInsightsSettingName = 'APPLICATIONINSIGHTS_CONNECTION_STRING'
+    $appInsightsSettingName = 'APPLICATIONINSIGHTS_CONNECTION_STRING'
   }
 
-  It "Should contain an App Setting named $appInsightsSettingName" {
+  It "Should contain the App Setting named $appInsightsSettingName" {
     # arrange
     $params = @{
       ResourceType      = "WebApp"
@@ -78,11 +78,11 @@ Describe 'Verify Web App Config'{
 
 Describe 'Verify Web App Static Site Exists' {
   BeforeAll {
-    $Script:webappStaticSiteName = 'staticwebapptest'
-    $Script:noWebAppStaticSiteName = 'nostaticwebapptest'
+    $webappStaticSiteName = 'staticwebapptest'
+    $noWebAppStaticSiteName = 'nostaticwebapptest'
   }
 
-  It "Should contain a Web App named $webappStaticSiteName" {
+  It "Should contain the Web App named $webappStaticSiteName" {
     # arrange
     $params = @{
       ResourceType      = "WebAppStaticSite"
@@ -94,7 +94,7 @@ Describe 'Verify Web App Static Site Exists' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Web App named $webappStaticSiteName - ConfirmAzBPResource" {
+  It "Should contain the Web App named $webappStaticSiteName - ConfirmAzBPResource" {
     # arrange
     $params = @{
       ResourceType      = "WebAppStaticSite"
@@ -108,12 +108,12 @@ Describe 'Verify Web App Static Site Exists' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Web App named $webappStaticSiteName" {
+  It "Should contain the Web App named $webappStaticSiteName" {
     Confirm-AzBPWebAppStaticSite -ResourceGroupName $rgName -StaticWebAppName $webappStaticSiteName
     | Should -BeSuccessful
   }
 
-  It "Should not contain a Web App named $nowebappStaticSiteName" {
+  It "Should not contain the Web App named $nowebappStaticSiteName" {
     # arrange
     # The '-ErrorAction SilentlyContinue' command suppresses all errors.
     # In this test, it will suppress the error message when a resource cannot be found.
@@ -128,12 +128,12 @@ Describe 'Verify Web App Static Site Exists' {
     Confirm-AzBPWebAppStaticSite @params | Should -Not -BeSuccessful
   }
 
-  It "Should contain a Web App named $webappStaticSiteName in $location" {
+  It "Should contain the Web App named $webappStaticSiteName in the location" {
     Confirm-AzBPWebAppStaticSite -ResourceGroupName $rgName -StaticWebAppName $webappStaticSiteName
     | Should -BeInLocation $location
   }
 
-  It "Should contain a Web App named $webappStaticSiteName in $rgName" {
+  It "Should contain the Web App named $webappStaticSiteName in the resource group" {
     Confirm-AzBPWebAppStaticSite -ResourceGroupName $rgName -StaticWebAppName $webappStaticSiteName
     | Should -BeInResourceGroup $rgName
   }

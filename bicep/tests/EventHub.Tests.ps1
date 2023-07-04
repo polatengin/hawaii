@@ -1,18 +1,18 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $Script:rgName = 'rg-test'
-  $Script:nameSpaceName = 'eventhubnamespace'
-  $Script:eventHubName = 'eventhub'
-  $Script:location = 'westus3'
+  $rgName = 'rg-test'
+  $nameSpaceName = 'eventhubnamespace'
+  $eventHubName = 'eventhub'
+  $location = 'westus3'
 }
 
 Describe 'Verify Event Hub' {
   BeforeAll {
-    $Script:noEventHub = 'noeventhub'
+    $noEventHub = 'noeventhub'
   }
 
-  It "Should contain an Event Hub named $eventHubName" {
+  It "Should contain the Event Hub named $eventHubName" {
     # arrange
     $params = @{
       ResourceType      = "EventHub"
@@ -25,7 +25,7 @@ Describe 'Verify Event Hub' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain an Event Hub named $eventHubName" {
+  It "Should contain the Event Hub named $eventHubName" {
     # arrange
     $params = @{
       ResourceType      = "EventHub"
@@ -40,7 +40,7 @@ Describe 'Verify Event Hub' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain an Event Hub named $eventHubName" {
+  It "Should contain the Event Hub named $eventHubName" {
     # arrange
     $params = @{
       ResourceGroupName = $rgName
@@ -52,7 +52,7 @@ Describe 'Verify Event Hub' {
     Confirm-AzBPEventHub @params | Should -BeSuccessful
   }
 
-  It "Should contain an Event Hub named $eventHubName in $location" {
+  It "Should contain the Event Hub named $eventHubName in the location" {
     # arrange
     $params = @{
       ResourceGroupName = $rgName
@@ -64,7 +64,7 @@ Describe 'Verify Event Hub' {
     Confirm-AzBPEventHub @params | Should -BeInLocation $location
   }
 
-  It "Should contain an Event Hub named $eventHubName in  $rgName" {
+  It "Should contain the Event Hub named $eventHubName in  $rgName" {
     # arrange
     $params = @{
       ResourceGroupName = $rgName
@@ -79,10 +79,10 @@ Describe 'Verify Event Hub' {
 
 Describe 'Verify Event Hub Namespace' {
   BeforeAll {
-    $Script:noNameSpaceName = 'nosamplenamespace'
+    $noNameSpaceName = 'nosamplenamespace'
   }
 
-  It "Should contain an Event Hub Namespace named $nameSpaceName" {
+  It "Should contain the Event Hub Namespace named $nameSpaceName" {
     # arrange
     $params = @{
       ResourceType      = "EventHubNamespace"
@@ -94,7 +94,7 @@ Describe 'Verify Event Hub Namespace' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain an Event Hub Namespace named $nameSpaceName" {
+  It "Should contain the Event Hub Namespace named $nameSpaceName" {
     # arrange
     $params = @{
       ResourceType      = "EventHubNamespace"
@@ -108,16 +108,16 @@ Describe 'Verify Event Hub Namespace' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain an Event Hub Namespace named $nameSpaceName" {
+  It "Should contain the Event Hub Namespace named $nameSpaceName" {
     Confirm-AzBPEventHubNamespace -NamespaceName $namespaceName -ResourceGroupName $rgName | Should -BeSuccessful
   }
 
-  It "Should contain an Event Hub Namespace named $nameSpaceName in $location" {
+  It "Should contain the Event Hub Namespace named $nameSpaceName in the location" {
     Confirm-AzBPEventHubNamespace -NamespaceName $namespaceName -ResourceGroupName $rgName
     | Should -BeInLocation $location
   }
 
-  It "Should contain an Event Hub Namespace named $nameSpaceName in $rgName" {
+  It "Should contain the Event Hub Namespace named $nameSpaceName in the resource group" {
     Confirm-AzBPEventHubNamespace -NamespaceName $namespaceName -ResourceGroupName $rgName
     | Should -BeInResourceGroup $rgName
   }
@@ -125,11 +125,11 @@ Describe 'Verify Event Hub Namespace' {
 
 Describe 'Verify Event Hub Consumer Group' {
   BeforeAll {
-    $Script:consumerGroupName = 'eventhubconsumergroup'
-    $Script:noConsumerGroupName = 'noeventhubconsumergroup'
+    $consumerGroupName = 'eventhubconsumergroup'
+    $noConsumerGroupName = 'noeventhubconsumergroup'
   }
 
-  It "Should contain an Event Hub Consumer Group named $consumerGroupName" {
+  It "Should contain the Event Hub Consumer Group named $consumerGroupName" {
     # arrange
     $params = @{
       ResourceType      = "EventHubConsumerGroup"
@@ -143,7 +143,7 @@ Describe 'Verify Event Hub Consumer Group' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain an Event Hub Consumer Group named $consumerGroupName" {
+  It "Should contain the Event Hub Consumer Group named $consumerGroupName" {
     # arrange
     $params = @{
       ResourceType      = "EventHubConsumerGroup"
@@ -159,7 +159,7 @@ Describe 'Verify Event Hub Consumer Group' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain an Event Hub Consumer Group named $consumerGroupName" {
+  It "Should contain the Event Hub Consumer Group named $consumerGroupName" {
     # arrange
     $params = @{
       ResourceGroupName = $rgName
@@ -172,7 +172,7 @@ Describe 'Verify Event Hub Consumer Group' {
     Confirm-AzBPEventHubConsumerGroup @params | Should -BeSuccessful
   }
 
-  It "Should contain an Event Hub Consumer Group named $consumerGroupName in $location" {
+  It "Should contain the Event Hub Consumer Group named $consumerGroupName in the location" {
     # arrange
     $params = @{
       ResourceGroupName = $rgName
@@ -185,7 +185,7 @@ Describe 'Verify Event Hub Consumer Group' {
     Confirm-AzBPEventHubConsumerGroup @params | Should -BeInLocation $location
   }
 
-  It "Should contain an Event Hub Consumer Group named $consumerGroupName in $rgName" {
+  It "Should contain the Event Hub Consumer Group named $consumerGroupName in the resource group" {
     # arrange
     $params = @{
       ResourceGroupName = $rgName

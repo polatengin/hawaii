@@ -1,14 +1,14 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $Script:rgName       = 'rg-test'
-  $Script:location     = 'westus3'
-  $Script:serverName   = 'samplepostgresqlserver'
-  $Script:noServerName = 'nosamplepostgresqlserver'
+  $rgName       = 'rg-test'
+  $location     = 'westus3'
+  $serverName   = 'samplepostgresqlserver'
+  $noServerName = 'nosamplepostgresqlserver'
 }
 
 Describe 'Verify PostgreSql Flexible Server' {
-  It "Should contain a PostgreSQL Flexible Server named $serverName" {
+  It "Should contain the PostgreSQL Flexible Server named $serverName" {
     # arrange
     $params = @{
       ResourceType      = "PostgreSqlFlexibleServer"
@@ -20,7 +20,7 @@ Describe 'Verify PostgreSql Flexible Server' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a PostgreSQL Flexible Server with Name property of $serverName" {
+  It "Should contain the PostgreSQL Flexible Server with Name property of $serverName" {
     # arrange
     $params = @{
       ResourceType      = "PostgreSqlFlexibleServer"
@@ -34,15 +34,15 @@ Describe 'Verify PostgreSql Flexible Server' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a PostgreSQL Flexible Server named $serverName" {
+  It "Should contain the PostgreSQL Flexible Server named $serverName" {
     Confirm-AzBPPostgreSqlFlexibleServer -ResourceGroupName $rgName -Name $serverName | Should -BeSuccessful
   }
 
-  It "Should contain a PostgreSQL Flexible Server named $serverName in $location" {
+  It "Should contain the PostgreSQL Flexible Server named $serverName in the location" {
     Confirm-AzBPPostgreSqlFlexibleServer -ResourceGroupName $rgName -Name $serverName | Should -BeInLocation $location
   }
 
-  It "Should contain a PostgreSQL Flexible Server named $serverName in a resource group named $rgName" {
+  It "Should contain the PostgreSQL Flexible Server named $serverName in a resource group named $rgName" {
     Confirm-AzBPPostgreSqlFlexibleServer -ResourceGroupName $rgName -Name $serverName
     | Should -BeInResourceGroup $rgName
   }

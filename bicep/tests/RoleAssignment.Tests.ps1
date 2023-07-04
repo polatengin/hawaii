@@ -1,14 +1,14 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
-  $Script:principalId = 'sampleappid'
-  $Script:scope = '/subscriptions/id'
-  $Script:roleName = 'Reader'
-  $Script:noRoleName = 'Owner'
+  $principalId = 'sampleappid'
+  $scope = '/subscriptions/id'
+  $roleName = 'Reader'
+  $noRoleName = 'Owner'
 }
 
 Describe 'Verify Role Assignment Exists' {
-  It "Should contain a Service Principal with $roleName Role" {
+  It "Should contain the Service Principal with $roleName Role" {
     # arrange
     $params = @{
       ResourceType         = 'RoleAssignment'
@@ -21,7 +21,7 @@ Describe 'Verify Role Assignment Exists' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should contain a Service Principal with $roleName Role" {
+  It "Should contain the Service Principal with $roleName Role" {
     # arrange
     $params = @{
       ResourceType         = 'RoleAssignment'
@@ -36,7 +36,7 @@ Describe 'Verify Role Assignment Exists' {
     Confirm-AzBPResource @params | Should -BeSuccessful
   }
 
-  It "Should not contain a Service Principal with $noRoleName Role" {
+  It "Should not contain the Service Principal with $noRoleName Role" {
     # arrange
     $params = @{
       ServicePrincipalId   = $principalId
