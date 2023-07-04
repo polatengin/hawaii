@@ -76,6 +76,6 @@ jobs:
       addSpnToEnvironment: true
       scriptType: "pscore"
       scriptLocation: "inlineScript"
-      workingDirectory: '$(Build.SourcesDirectory)/bicep/tests'
+      workingDirectory: "$(Build.SourcesDirectory)/bicep/tests"
       inlineScript: |
         Invoke-Pester -OutputFile test.xml -OutputFormat NUnitXML
