@@ -1,17 +1,17 @@
 ﻿BeforeAll {
   Import-Module Az.InfrastructureTesting
 
+  # arrange
   $rgName = "rg-hawaii-${env:buildId}"
   $nameSpaceName = "eventhubnamespace"
   $eventHubName = "eventhub"
   $location = "${env:location}"
+
+  # log
+  Write-Host "Running Event Hub Tests for {rgName: $rgName}, {nameSpaceName: $nameSpaceName}, {eventHubName: $eventHubName}, {location: $location}"
 }
 
 Describe "Verify Event Hub" {
-  BeforeAll {
-    $noEventHub = "noeventhub"
-  }
-
   It "Should contain the Event Hub named $eventHubName" {
     # arrange
     $params = @{
