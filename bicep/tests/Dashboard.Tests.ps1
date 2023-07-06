@@ -29,11 +29,11 @@ Describe "Verify Dashboard" {
     $result.ResourceDetails.Location | Should -Be "$location"
   }
 
-  It "Should contain the Dashboard in the resource group" {
+  It "Should contain the Dashboard in the correct Type" {
     # act
     $result = Confirm-AzBPPortalDashboard -ResourceGroupName $rgName -Name $dashboardName
 
     # assert
-    $result.ResourceDetails.ResourceGroupName | Should -Be "$rgName"
+    $result.ResourceDetails.Type | Should -Be "Microsoft.Portal/dashboards"
   }
 }

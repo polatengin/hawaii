@@ -20,8 +20,6 @@ Describe "Cosmos DB Gremlin Database" {
     # act
     $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $gremlinAccountName
 
-    Write-Host ($result | ConvertTo-Json -Depth 100)
-
     # assert
     $result | Should -Be -Not $null
   }
@@ -34,12 +32,20 @@ Describe "Cosmos DB Gremlin Database" {
     $result.ResourceDetails.Location | Should -Be "West US"
   }
 
-  It "Should contain the Cosmos DB Account in the resource group" {
+  It "Should contain the Cosmos DB Account in the correct Kind" {
     # act
     $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $gremlinAccountName
 
     # assert
-    $result.ResourceDetails.ResourceGroup | Should -Be "$rgName"
+    $result.ResourceDetails.Kind | Should -Be "GlobalDocumentDB"
+  }
+
+  It "Should contain the Cosmos DB Account PublicNetworkAccess enabled" {
+    # act
+    $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $gremlinAccountName
+
+    # assert
+    $result.ResourceDetails.PublicNetworkAccess | Should -Be "Enabled"
   }
 }
 
@@ -48,8 +54,6 @@ Describe "Comsos DB Mongo DB Database" {
     # act
     $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $mongoAccountName
 
-    Write-Host ($result | ConvertTo-Json -Depth 100)
-
     # assert
     $result | Should -Be -Not $null
   }
@@ -62,12 +66,20 @@ Describe "Comsos DB Mongo DB Database" {
     $result.ResourceDetails.Location | Should -Be "West US"
   }
 
-  It "Should contain the Cosmos DB Account in the resource group" {
+  It "Should contain the Cosmos DB Account in the correct Kind" {
     # act
     $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $mongoAccountName
 
     # assert
-    $result.ResourceDetails.ResourceGroup | Should -Be "$rgName"
+    $result.ResourceDetails.MongoDB | Should -Be "MongoDB"
+  }
+
+  It "Should contain the Cosmos DB Account PublicNetworkAccess enabled" {
+    # act
+    $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $mongoAccountName
+
+    # assert
+    $result.ResourceDetails.PublicNetworkAccess | Should -Be "Enabled"
   }
 }
 
@@ -76,8 +88,6 @@ Describe "Comsos DB SQL Database" {
     # act
     $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $sqlAccountName
 
-    Write-Host ($result | ConvertTo-Json -Depth 100)
-
     # assert
     $result | Should -Be -Not $null
   }
@@ -90,11 +100,19 @@ Describe "Comsos DB SQL Database" {
     $result.ResourceDetails.Location | Should -Be "West US"
   }
 
-  It "Should contain the Cosmos DB Account in the resource group" {
+  It "Should contain the Cosmos DB Account in the correct Kind" {
     # act
     $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $sqlAccountName
 
     # assert
-    $result.ResourceDetails.ResourceGroup | Should -Be "$rgName"
+    $result.ResourceDetails.Kind | Should -Be "GlobalDocumentDB"
+  }
+
+  It "Should contain the Cosmos DB Account PublicNetworkAccess enabled" {
+    # act
+    $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $sqlAccountName
+
+    # assert
+    $result.ResourceDetails.PublicNetworkAccess | Should -Be "Enabled"
   }
 }

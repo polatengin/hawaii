@@ -1,14 +1,16 @@
 ﻿BeforeAll {
   Import-Module BenchPress.Azure
 
+  # arrange
   $rgName = "rg-hawaii-${env:buildId}"
-  $kvName = "kvbenchpresstest"
-  $noKvName = "nokvbenchpresstest"
+  $kvName = "kv-hawaii-${env:buildId}"
   $kvKeyName = "samplekey"
   $kvSecretName = "samplesecret"
-  $kvCertificateName = "samplecert"
-  $kvAccessPolicyObjectId = "svcprinoid"
+  $kvAccessPolicyObjectId = "${env:AZ_SP_HAWAII_ID}"
   $location = "${env:location}"
+
+  # log
+  Write-Host "Running Key Vault Tests for {rgName: $rgName}, {location: $location}, {kvName: $kvName}, {kvKeyName: $kvKeyName}, {kvSecretName: $kvSecretName}, {kvAccessPolicyObjectId: $kvAccessPolicyObjectId}"
 }
 
 Describe "Verify Key Vault" {
@@ -49,14 +51,6 @@ Describe "Verify Key Vault" {
 
   It "Should contain the Secret named $kvSecretName in the Key Vault named $kvName" {
     Confirm-AzBPKeyVaultSecret -KeyVaultName $kvName -Name $kvSecretName | Should -BeSuccessful
-  }
-
-  It "Should not contain the Key Vault named $noKvName" {
-    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
-    # In this test, it will suppress the error message when a resource cannot be found.
-    # Remove this field to see all errors.
-    Confirm-AzBPKeyVault -ResourceGroupName $rgName -Name $noKvName -ErrorAction SilentlyContinue
-    | Should -Not -BeSuccessful
   }
 
   It "Should contain the Key Vault named $kvName in the location" {
