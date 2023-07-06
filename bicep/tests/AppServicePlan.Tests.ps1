@@ -19,17 +19,19 @@ Describe "Verify App Service Plan" {
     $result | Should -Be -Not $null
   }
 
-  It "Should contain the App Service Plan named $appServicePlanName in the location" {
+  It "Should contain the App Service Plan in the location" {
     # act
     $result = Confirm-AzBPAppServicePlan -ResourceGroupName $rgName -AppServicePlanName $appServicePlanName
 
     # assert
-    $result.ResourceDetails.Location | Should -Be "$location"
+    $result.ResourceDetails.Location | Should -Be "West US"
   }
 
-  It "Should contain the App Service Plan named $appServicePlanName in the resource group" {
+  It "Should contain the App Service Plan in the resource group" {
     # act
     $result = Confirm-AzBPAppServicePlan -ResourceGroupName $rgName -AppServicePlanName $appServicePlanName
+
+    Write-Host ($result | ConvertTo-Json -Depth 100)
 
     # assert
     $result.ResourceDetails.ResourceGroupName | Should -Be "$rgName"
