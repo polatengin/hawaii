@@ -31,9 +31,7 @@ Describe "Verify App Service Plan" {
     # act
     $result = Confirm-AzBPAppServicePlan -ResourceGroupName $rgName -AppServicePlanName $appServicePlanName
 
-    Write-Host ($result | ConvertTo-Json -Depth 100)
-
     # assert
-    $result.ResourceDetails.ResourceGroupName | Should -Be "$rgName"
+    $result.ResourceDetails.ResourceGroup | Should -Be "$rgName"
   }
 }
