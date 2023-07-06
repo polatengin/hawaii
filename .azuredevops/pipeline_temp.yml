@@ -37,6 +37,7 @@ jobs:
         az bicep upgrade
 
         Install-Module -Name Az -Force
+        Install-Module -Name Az.App -Force
         Install-Module -Name Pester -Force
         Install-Module -Name BenchPress.Azure -Force
 
