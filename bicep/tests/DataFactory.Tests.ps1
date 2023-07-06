@@ -1,5 +1,5 @@
 ﻿BeforeAll {
-  Import-Module Az.InfrastructureTesting
+  Import-Module BenchPress.Azure
 
   # arrange
   $rgName = "rg-hawaii-${env:buildId}"
