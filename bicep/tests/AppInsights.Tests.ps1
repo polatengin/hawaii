@@ -3,9 +3,9 @@
 
   # arrange
   $rgName = "rg-hawaii-${env:buildId}"
-  $appInsightsName = "appinsightstest"
+  $appInsightsName = "appinsights-hawaii-${env:buildId}"
   $location = "${env:location}"
-  $diagnosticSettingName = "diagnosticsettingtest"
+  $diagnosticSettingName = "default"
   $resourceId = "path/for/resourceId"
 
   # log

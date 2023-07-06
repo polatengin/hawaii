@@ -3,7 +3,7 @@
 
   # arrange
   $rgName = "rg-hawaii-${env:buildId}"
-  $appServicePlanName = "appserviceplantest"
+  $appServicePlanName = "asp-hawaii-${env:buildId}"
   $location = "${env:location}"
 
   # log
