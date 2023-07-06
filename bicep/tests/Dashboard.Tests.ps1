@@ -4,7 +4,7 @@
   # arrange
   $rgName = "rg-hawaii-${env:buildId}"
   $location = "${env:location}"
-  $dashboardName = "sampleDashboard"
+  $dashboardName = "dash-hawaii-${env:buildId}"
 
   # log
   Write-Host "Running Dashboard Tests for {rgName: $rgName}, {dashboardName: $dashboardName}, {location: $location}"

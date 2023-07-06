@@ -3,8 +3,8 @@
 
   # arrange
   $rgName = "rg-hawaii-${env:buildId}"
-  $dataFactoryName = "sampleadf"
   $location = "${env:location}"
+  $dataFactoryName = "adf-hawaii-${env:buildId}"
 
   # log
   Write-Host "Running Data Factory Tests for {rgName: $rgName}, {dataFactoryName: $dataFactoryName}, {location: $location}"

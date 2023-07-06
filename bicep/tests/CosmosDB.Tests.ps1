@@ -4,12 +4,12 @@
   # arrange
   $rgName = "rg-hawaii-${env:buildId}"
   $location = "${env:location}"
-  $gremlinAccountName = "gremlin-account-name"
-  $gremlinDatabaseName = "gremlin-db-name"
-  $mongoAccountName = "mongodb-account-name"
-  $mongoDatabaseName = "mongodb-db-name"
-  $sqlAccountName = "sql-account-name"
-  $sqlDatabaseName = "sql-db-name"
+  $gremlinAccountName = "gremlin-hawaii-${env:buildId}"
+  $gremlinDatabaseName = "gremlin-db-name-${env:buildId}"
+  $mongoAccountName = "mongo-hawaii-${env:buildId}"
+  $mongoDatabaseName = "mongodb-db-name-${env:buildId}"
+  $sqlAccountName = "sql-hawaii-${env:buildId}"
+  $sqlDatabaseName = "sql-db-name-${env:buildId}"
 
   # log
   Write-Host "Running Cosmos DB Tests for {rgName: $rgName}, {location: $location}, {gremlinAccountName: $gremlinAccountName}, {gremlinDatabaseName: $gremlinDatabaseName}, {mongoAccountName: $mongoAccountName}, {mongoDatabaseName: $mongoDatabaseName}, {sqlAccountName: $sqlAccountName}, {sqlDatabaseName: $sqlDatabaseName}"

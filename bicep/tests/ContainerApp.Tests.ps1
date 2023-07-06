@@ -4,8 +4,8 @@
   # arrange
   $rgName = "rg-hawaii-${env:buildId}"
   $location = "${env:location}"
-  $containerAppName   = "containerAppBenchPressTest"
-  $managedEnvName   = "managedenvbenchpresstest"
+  $containerAppName   = "acr-hawaii-${env:buildId}"
+  $managedEnvName   = "envacr-hawaii-${env:buildId}"
 
   # log
   Write-Host "Running Container Application Tests for {rgName: $rgName}, {location: $location}, {containerAppName: $containerAppName}, {managedEnvName: $managedEnvName}"
