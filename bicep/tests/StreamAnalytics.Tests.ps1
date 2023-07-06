@@ -1,15 +1,21 @@
 ﻿BeforeAll {
   Import-Module BenchPress.Azure
 
+  # arrange
   $rgName = "rg-hawaii-${env:buildId}"
   $location = "${env:location}"
+  $clusterName = "clstr-hawaii-${env:buildId}"
+  $jobName = "hawaiijob-${env:buildId}"
+  $functionName = "hawaiifunction"
+  $inputName = "hawaiiinput"
+  $outputName = "hawaiioutput"
+  $transformationName = "hawaiitransformation"
+
+  # log
+  Write-Host "Running Stream Analytics Tests for {rgName: $rgName}, {location: $location}, {clusterName: $clusterName}, {jobName: $jobName}, {functionName: $functionName}, {inputName: $inputName}, {outputName: $outputName}, {transformationName: $transformationName}"
 }
 
 Describe "Verify Stream Analytics Cluster" {
-  BeforeAll {
-    $clusterName = "teststreamcluster"
-  }
-
   It "Should contain the Stream Analytics Cluster named $clusterName" {
     # arrange
     $params = @{
@@ -51,14 +57,6 @@ Describe "Verify Stream Analytics Cluster" {
 }
 
 Describe "Stream Analytics Jobs" {
-  BeforeAll {
-    $jobName = "testjob"
-    $functionName = "testfunction"
-    $inputName = "testinput"
-    $outputName = "testoutput"
-    $transformationName = "testtransformation"
-  }
-
   It "Should contain the Stream Analytics Job named $jobName" {
     # arrange
     $params = @{
@@ -96,8 +94,6 @@ Describe "Stream Analytics Jobs" {
   It "Should contain the Stream Analytics Job named $jobName in the resource group" {
     Confirm-AzBPStreamAnalyticsJob -ResourceGroupName $rgName -Name $jobName | Should -BeInResourceGroup $rgName
   }
-
-#######################################################################################################################
 
   It "Should contain the Stream Analytics Function named $functionName" {
     # arrange
@@ -150,8 +146,6 @@ Describe "Stream Analytics Jobs" {
     # act and assert
     Confirm-AzBPStreamAnalyticsFunction @params | Should -BeInResourceGroup $rgName
   }
-
-#######################################################################################################################
 
   It "Should contain the Stream Analytics Input named $inputName" {
     # arrange

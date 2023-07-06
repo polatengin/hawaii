@@ -71,7 +71,7 @@ Describe "Comsos DB Mongo DB Database" {
     $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $mongoAccountName
 
     # assert
-    $result.ResourceDetails.MongoDB | Should -Be "MongoDB"
+    $result.ResourceDetails.Kind | Should -Be "MongoDB"
   }
 
   It "Should contain the Cosmos DB Account PublicNetworkAccess enabled" {

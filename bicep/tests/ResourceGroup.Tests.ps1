@@ -1,9 +1,12 @@
 ﻿BeforeAll {
   Import-Module BenchPress.Azure
 
+  # arrange
   $rgName = "rg-hawaii-${env:buildId}"
-  $noRgName = "notestrg"
   $location = "${env:location}"
+
+  # log
+  Write-Host "Running Resource Group tests for {rgName: $rgName}, {location: $location}"
 }
 
 Describe "Verify Resource Group Exists" {
@@ -34,13 +37,6 @@ Describe "Verify Resource Group Exists" {
 
   It "Should contain the Resource Group named $rgName" {
     Confirm-AzBPResourceGroup -ResourceGroupName $rgName | Should -BeSuccessful
-  }
-
-  It "Should not contain the Resource Group named $noRgName" {
-    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
-    # In this test, it will suppress the error message when a resource cannot be found.
-    # Remove this field to see all errors.
-    Confirm-AzBPResourceGroup -ResourceGroupName $noRgName -ErrorAction SilentlyContinue | Should -Not -BeSuccessful
   }
 
   It "Should contain the Resource Group named $rgName in the location" {

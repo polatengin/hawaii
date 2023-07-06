@@ -1,10 +1,14 @@
 ﻿BeforeAll {
   Import-Module BenchPress.Azure
 
+  # arrange
   $principalId = "sampleappid"
   $scope = "/subscriptions/id"
   $roleName = "Reader"
-  $noRoleName = "Owner"
+  $noRoleName = "Contributor"
+
+  # log
+  Write-Host "Running Role Assignment Tests for {principalId: $principalId}, {scope: $scope}, {roleName: $roleName}, {noRoleName: $noRoleName}"
 }
 
 Describe "Verify Role Assignment Exists" {

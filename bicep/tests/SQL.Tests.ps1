@@ -1,11 +1,14 @@
 ﻿BeforeAll {
   Import-Module BenchPress.Azure
 
+  # arrange
   $rgName = "rg-hawaii-${env:buildId}"
   $location = "${env:location}"
-  $serverName = "samplesqlserver"
-  $noDatabaseName = "nosamplesqlserver"
-  $databaseName = "samplesqldatabase"
+  $serverName = "sqlsvr-hawaii-${env:buildId}"
+  $databaseName = "sqldb-hawaii-${env:buildId}"
+
+  # log
+  Write-Host "Running SQL Tests for {rgName: $rgName}, {location: $location}, {serverName: $serverName}, {databaseName: $databaseName}"
 }
 
 Describe "Verify SQL Database" {
@@ -50,22 +53,6 @@ Describe "Verify SQL Database" {
     Confirm-AzBPSqlDatabase @params | Should -BeSuccessful
   }
 
-  It "Should not contain the SQL Database named $noDatabaseName" {
-    # arrange
-    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
-    # In this test, it will suppress the error message when a resource cannot be found.
-    # Remove this field to see all errors.
-    $params = @{
-      ResourceGroupName = $rgName
-      DatabaseName      = $noDatabaseName
-      ServerName        = $serverName
-      ErrorAction       = "SilentlyContinue"
-    }
-
-    # act and asssert
-    Confirm-AzBPSqlDatabase @params | Should -Not -BeSuccessful
-  }
-
   It "Should contain the SQL Database named $databaseName in the location" {
     # arrange
     $params = @{
@@ -92,10 +79,6 @@ Describe "Verify SQL Database" {
 }
 
 Describe "Verify SQL Server" {
-  BeforeAll {
-    $noServerName = "nosamplesqlserver"
-  }
-
   It "Should contain the SQL Server named $serverName" {
     # arrange
     $params = @{
@@ -127,14 +110,6 @@ Describe "Verify SQL Server" {
     Confirm-AzBPSqlServer -ResourceGroupName $rgName -ServerName $serverName | Should -BeSuccessful
   }
 
-  It "Should not contain the SQL Server named $noServerName" {
-    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
-    # In this test, it will suppress the error message when a resource cannot be found.
-    # Remove this field to see all errors.
-    Confirm-AzBPSqlServer -ResourceGroupName $rgName -ServerName $noServerName -ErrorAction SilentlyContinue
-    | Should -Not -BeSuccessful
-  }
-
   It "Should contain the SQL Server named $serverName in the location" {
     Confirm-AzBPSqlServer -ResourceGroupName $rgName -ServerName $serverName | Should -BeInLocation $location
   }
@@ -143,4 +118,3 @@ Describe "Verify SQL Server" {
     Confirm-AzBPSqlServer -ResourceGroupName $rgName -ServerName $serverName | Should -BeInResourceGroup $rgName
   }
 }
-

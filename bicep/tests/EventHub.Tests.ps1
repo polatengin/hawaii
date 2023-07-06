@@ -110,13 +110,11 @@ Describe "Verify Event Hub Namespace" {
   }
 
   It "Should contain the Event Hub Namespace named $nameSpaceName in the location" {
-    Confirm-AzBPEventHubNamespace -NamespaceName $namespaceName -ResourceGroupName $rgName
-    | Should -BeInLocation $location
+    Confirm-AzBPEventHubNamespace -NamespaceName $namespaceName -ResourceGroupName $rgName | Should -BeInLocation $location
   }
 
   It "Should contain the Event Hub Namespace named $nameSpaceName in the resource group" {
-    Confirm-AzBPEventHubNamespace -NamespaceName $namespaceName -ResourceGroupName $rgName
-    | Should -BeInResourceGroup $rgName
+    Confirm-AzBPEventHubNamespace -NamespaceName $namespaceName -ResourceGroupName $rgName | Should -BeInResourceGroup $rgName
   }
 }
 

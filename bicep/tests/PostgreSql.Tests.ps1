@@ -1,10 +1,13 @@
 ﻿BeforeAll {
   Import-Module BenchPress.Azure
 
-  $rgName       = "rg-test"
-  $location     = "westus3"
-  $serverName   = "samplepostgresqlserver"
-  $noServerName = "nosamplepostgresqlserver"
+  # arrange
+  $rgName = "rg-hawaii-${env:buildId}"
+  $location     = "${env:location}"
+  $serverName   = "psql-hawaii-${env:buildId}"
+
+  # log
+  Write-Host "Running PostgreSQL Flexible Server tests for {rgName: $rgName}, {location: $location}, {serverName: $serverName}"
 }
 
 Describe "Verify PostgreSql Flexible Server" {
@@ -43,7 +46,6 @@ Describe "Verify PostgreSql Flexible Server" {
   }
 
   It "Should contain the PostgreSQL Flexible Server named $serverName in a resource group named $rgName" {
-    Confirm-AzBPPostgreSqlFlexibleServer -ResourceGroupName $rgName -Name $serverName
-    | Should -BeInResourceGroup $rgName
+    Confirm-AzBPPostgreSqlFlexibleServer -ResourceGroupName $rgName -Name $serverName | Should -BeInResourceGroup $rgName
   }
 }

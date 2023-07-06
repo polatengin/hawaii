@@ -15,8 +15,6 @@ Describe "Verify Dashboard" {
     # act
     $result = Confirm-AzBPPortalDashboard -ResourceGroupName $rgName -Name $dashboardName
 
-    Write-Host ($result | ConvertTo-Json -Depth 100)
-
     # assert
     $result | Should -Be -Not $null
   }
