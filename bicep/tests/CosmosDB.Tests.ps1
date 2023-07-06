@@ -20,6 +20,8 @@ Describe "Cosmos DB Gremlin Database" {
     # act
     $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $gremlinAccountName
 
+    Write-Host ($result | ConvertTo-Json -Depth 100)
+
     # assert
     $result | Should -Be -Not $null
   }
@@ -46,6 +48,8 @@ Describe "Comsos DB Mongo DB Database" {
     # act
     $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $mongoAccountName
 
+    Write-Host ($result | ConvertTo-Json -Depth 100)
+
     # assert
     $result | Should -Be -Not $null
   }
@@ -71,6 +75,8 @@ Describe "Comsos DB SQL Database" {
   It "Should contain the Cosmos DB Account" {
     # act
     $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $sqlAccountName
+
+    Write-Host ($result | ConvertTo-Json -Depth 100)
 
     # assert
     $result | Should -Be -Not $null
