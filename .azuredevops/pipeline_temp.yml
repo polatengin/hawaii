@@ -38,6 +38,7 @@ jobs:
 
         Install-Module -Name Az -Force
         Install-Module -Name Az.App -Force
+        Install-Module -Name Az.Portal -Force
         Install-Module -Name Pester -Force
         Install-Module -Name BenchPress.Azure -Force
 

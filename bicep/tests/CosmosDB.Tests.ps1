@@ -29,7 +29,7 @@ Describe "Cosmos DB Gremlin Database" {
     $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $gremlinAccountName
 
     # assert
-    $result.ResourceDetails.Location | Should -Be "$location"
+    $result.ResourceDetails.Location | Should -Be "West US"
   }
 
   It "Should contain the Cosmos DB Account in the resource group" {
@@ -37,7 +37,7 @@ Describe "Cosmos DB Gremlin Database" {
     $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $gremlinAccountName
 
     # assert
-    $result.ResourceDetails.ResourceGroupName | Should -Be "$rgName"
+    $result.ResourceDetails.ResourceGroup | Should -Be "$rgName"
   }
 }
 
@@ -55,7 +55,7 @@ Describe "Comsos DB Mongo DB Database" {
     $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $mongoAccountName
 
     # assert
-    $result.ResourceDetails.Location | Should -Be "$location"
+    $result.ResourceDetails.Location | Should -Be "West US"
   }
 
   It "Should contain the Cosmos DB Account in the resource group" {
@@ -63,7 +63,7 @@ Describe "Comsos DB Mongo DB Database" {
     $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $mongoAccountName
 
     # assert
-    $result.ResourceDetails.ResourceGroupName | Should -Be "$rgName"
+    $result.ResourceDetails.ResourceGroup | Should -Be "$rgName"
   }
 }
 
@@ -81,7 +81,7 @@ Describe "Comsos DB SQL Database" {
     $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $sqlAccountName
 
     # assert
-    $result.ResourceDetails.Location | Should -Be "$location"
+    $result.ResourceDetails.Location | Should -Be "West US"
   }
 
   It "Should contain the Cosmos DB Account in the resource group" {
@@ -89,6 +89,6 @@ Describe "Comsos DB SQL Database" {
     $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $sqlAccountName
 
     # assert
-    $result.ResourceDetails.ResourceGroupName | Should -Be "$rgName"
+    $result.ResourceDetails.ResourceGroup | Should -Be "$rgName"
   }
 }

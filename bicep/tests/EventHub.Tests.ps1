@@ -3,12 +3,13 @@
 
   # arrange
   $rgName = "rg-hawaii-${env:buildId}"
-  $nameSpaceName = "eventhubnamespace"
-  $eventHubName = "eventhub"
   $location = "${env:location}"
+  $nameSpaceName = "evnthbnmspace-hawaii-${env:buildId}"
+  $eventHubName = "evnthb-hawaii-${env:buildId}"
+  $consumerGroupName = "evntconsumer-hawaii-${env:buildId}"
 
   # log
-  Write-Host "Running Event Hub Tests for {rgName: $rgName}, {nameSpaceName: $nameSpaceName}, {eventHubName: $eventHubName}, {location: $location}"
+  Write-Host "Running Event Hub Tests for {rgName: $rgName}, {nameSpaceName: $nameSpaceName}, {eventHubName: $eventHubName}, {consumerGroupName: $consumerGroupName}, {location: $location}"
 }
 
 Describe "Verify Event Hub" {
@@ -78,10 +79,6 @@ Describe "Verify Event Hub" {
 }
 
 Describe "Verify Event Hub Namespace" {
-  BeforeAll {
-    $noNameSpaceName = "nosamplenamespace"
-  }
-
   It "Should contain the Event Hub Namespace named $nameSpaceName" {
     # arrange
     $params = @{
@@ -124,11 +121,6 @@ Describe "Verify Event Hub Namespace" {
 }
 
 Describe "Verify Event Hub Consumer Group" {
-  BeforeAll {
-    $consumerGroupName = "eventhubconsumergroup"
-    $noConsumerGroupName = "noeventhubconsumergroup"
-  }
-
   It "Should contain the Event Hub Consumer Group named $consumerGroupName" {
     # arrange
     $params = @{

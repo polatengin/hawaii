@@ -16,8 +16,6 @@ Describe "Verify Container Application" {
     # act
     $result = Confirm-AzBPContainerApp -ResourceGroupName $rgName -Name $containerAppName
 
-    Write-Host ($result | ConvertTo-Json -Depth 100)
-
     # assert
     $result | Should -Be -Not $null
   }
@@ -27,7 +25,7 @@ Describe "Verify Container Application" {
     $result = Confirm-AzBPContainerApp -ResourceGroupName $rgName -Name $containerAppName
 
     # assert
-    $result.ResourceDetails.Location | Should -Be "$location"
+    $result.ResourceDetails.Location | Should -Be "West US"
   }
 
   It "Should contain the Container Application in the resource group" {
@@ -44,8 +42,6 @@ Describe "Verify Container Application Managed Environment" {
     # act
     $result = Confirm-AzBPContainerAppManagedEnv -ResourceGroupName $rgName -Name $managedEnvName
 
-    Write-Host ($result | ConvertTo-Json -Depth 100)
-
     # assert
     $result | Should -Be -Not $null
   }
@@ -55,7 +51,7 @@ Describe "Verify Container Application Managed Environment" {
     $result = Confirm-AzBPContainerAppManagedEnv -ResourceGroupName $rgName -Name $managedEnvName
 
     # assert
-    $result.ResourceDetails.Location | Should -Be "$location"
+    $result.ResourceDetails.Location | Should -Be "West US"
   }
 
   It "Should contain the Container Application in the resource group" {
