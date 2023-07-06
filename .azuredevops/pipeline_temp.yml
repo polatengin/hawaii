@@ -38,7 +38,7 @@ jobs:
 
         Install-Module -Name Az -Force
         Install-Module -Name Pester -Force
-        Install-Module -Name Az.InfrastructureTesting -Force
+        Install-Module -Name BenchPress.Azure -Force
 
   - task: AzureCLI@2
     displayName: "Run e2e tests"
