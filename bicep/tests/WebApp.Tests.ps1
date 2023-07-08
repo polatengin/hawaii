@@ -3,7 +3,7 @@
 
   # arrange
   $rgName = "rg-hawaii-${env:buildId}"
-  $location = "${env:location}"
+  $location = "WestEurope"
   $webappName = "webapp-hawaii-${env:buildId}"
   $appInsightsSettingName = "APPLICATIONINSIGHTS_CONNECTION_STRING"
   $webappStaticSiteName = "staticwebapp-hawaii-${env:buildId}"
