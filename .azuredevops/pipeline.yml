@@ -86,3 +86,14 @@ jobs:
       workingDirectory: "$(Build.SourcesDirectory)/bicep/tests"
       inlineScript: |
         Invoke-Pester -OutputFile test.xml -OutputFormat NUnitXML
+
+  - task: PublishTestResults@2
+    displayName: "Publish test results"
+    inputs:
+      testResultsFormat: "NUnit"
+      testResultsFiles: "*.xml"
+      searchFolder: "$(System.DefaultWorkingDirectory)/bicep/tests"
+      failTaskOnFailedTests: true
+      testRunTitle: "Test Results"
+      publishRunAttachments: true
+      mergeTestResults: true
