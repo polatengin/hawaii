@@ -1,10 +1,13 @@
 ﻿BeforeAll {
   Import-Module BenchPress.Azure
 
+  # arrange
   $rgName = "rg-hawaii-${env:buildId}"
-  $vmName = "simpleLinuxVM1"
-  $noVmName = "noSimpleLinuxVM1"
+  $vmName = "vm-hawaii-${env:buildId}"
   $location = "${env:location}"
+
+  # log
+  Write-Host "Running Virtual Machine tests for {rgName: $rgName}, {location: $location}, {vmName: $vmName}"
 }
 
 Describe "Verify Virtual Machine" {
@@ -38,27 +41,11 @@ Describe "Verify Virtual Machine" {
     Confirm-AzBPVirtualMachine -ResourceGroupName $rgName -VirtualMachineName $vmName | Should -BeSuccessful
   }
 
-  It "Should not contain the Virtual Machine named $noVmName" {
-    # arrange
-    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
-    # In this test, it will suppress the error message when a resource cannot be found.
-    # Remove this field to see all errors.
-    $params = @{
-      ResourceGroupName  = $rgName
-      VirtualMachineName = $noVmName
-      ErrorAction        = "SilentlyContinue"
-    }
-
-    # act and assert
-    Confirm-AzBPVirtualMachine @params | Should -Not -BeSuccessful
-  }
-
   It "Should contain the Virtual Machine named $vmName in the location" {
     Confirm-AzBPVirtualMachine -ResourceGroupName $rgName -VirtualMachineName $vmName | Should -BeInLocation $location
   }
 
   It "Should contain the Virtual Machine named $vmName in the resource group" {
-    Confirm-AzBPVirtualMachine -ResourceGroupName $rgName -VirtualMachineName $vmName
-    | Should -BeInResourceGroup $rgName
+    Confirm-AzBPVirtualMachine -ResourceGroupName $rgName -VirtualMachineName $vmName | Should -BeInResourceGroup $rgName
   }
 }

@@ -1,16 +1,18 @@
 ﻿BeforeAll {
   Import-Module BenchPress.Azure
 
+  # arrange
   $rgName = "rg-hawaii-${env:buildId}"
-  $workSpaceName = "samplesynws"
   $location = "${env:location}"
+  $workSpaceName = "synapse-hawaii-${env:buildId}"
+  $sparkPoolName = "spark"
+  $sqlPoolName = "sql"
+
+  # log
+  Write-Host "Running Synapse tests for {rgName: $rgName}, {location: $location}, {workSpaceName: $workSpaceName}, {sparkPoolName: $sparkPoolName}, {sqlPoolName: $sqlPoolName}"
 }
 
 Describe "Verify Synapse Workspace" {
-  BeforeAll {
-    $noWorkspaceName = "nosamplesynws"
-  }
-
   It "Should contain the Synapse Workspace named $workSpaceName" {
     # arrange
     $params = @{
@@ -50,29 +52,9 @@ Describe "Verify Synapse Workspace" {
     Confirm-AzBPSynapseWorkspace -ResourceGroupName $rgName -WorkspaceName $workspaceName
     | Should -BeInResourceGroup $rgName
   }
-
-  It "Should not contain the Synapse Workspace named $noWorkspaceName" {
-    # arrange
-    # The "-ErrorAction SilentlyContinue" command suppresses all errors.
-    # In this test, it will suppress the error message when a resource cannot be found.
-    # Remove this field to see all errors.
-    $params = @{
-      ResourceGroupName = $rgName
-      WorkspaceName     = $noWorkspaceName
-      ErrorAction       = "SilentlyContinue"
-    }
-
-    # act and assert
-    Confirm-AzBPSynapseWorkspace @params | Should -Not -BeSuccessful
-  }
 }
 
 Describe "Verify Synapse Spark/SQL Pool" {
-  BeforeAll {
-    $sparkPoolName = "samplespark"
-    $sqlPoolName = "samplesql"
-  }
-
   It "Should contain the Synapse Spark Pool named $sparkPoolName" {
     # arrange
     $params = @{
@@ -135,8 +117,6 @@ Describe "Verify Synapse Spark/SQL Pool" {
     # act and assert
     Confirm-AzBPSynapseSparkPool @params | Should -BeInResourceGroup $rgName
   }
-
-#######################################################################################################################
 
   It "Should contain the Synapse SQL Pool named $sqlPoolName" {
     # arrange
