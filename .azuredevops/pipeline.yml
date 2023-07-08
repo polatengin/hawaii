@@ -36,6 +36,9 @@ jobs:
         az bicep install
         az bicep upgrade
 
+        Install-Module -Name Az -Force
+        Install-Module -Name Az.App -Force
+        Install-Module -Name Az.Portal -Force
         Install-Module -Name Pester -Force
         Install-Module -Name BenchPress.Azure -Force
 
@@ -44,6 +47,10 @@ jobs:
     env:
       buildId: $(buildId)
       location: $(location)
+      AZ_APPLICATION_ID: $(AZ_APPLICATION_ID)
+      AZ_ENCRYPTED_PASSWORD: $(AZ_ENCRYPTED_PASSWORD)
+      AZ_SUBSCRIPTION_ID: $(AZ_SUBSCRIPTION_ID)
+      AZ_TENANT_ID: $(AZ_TENANT_ID)
     inputs:
       azureSubscription: $(serviceConnectionName)
       addSpnToEnvironment: true
