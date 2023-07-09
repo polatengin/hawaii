@@ -61,11 +61,15 @@ foreach ($module in Get-ChildItem -Path "./bicep/modules" -Directory | Where-Obj
 
 - _Run e2e tests_
 
+In this step, Pester tests are executed to test the deployment of the infrastructure, output of the tests are saved to `output.xml` file in `NUnit` format.
+
 ```powershell
-Invoke-Pester -OutputFile test.xml -OutputFormat NUnitXML
+Invoke-Pester -OutputFile output.xml -OutputFormat NUnitXML
 ```
 
 - Publish test results
+
+In this step, test results are published to `Azure DevOps` using `PublishTestResults@2` task.
 
 ```yml
 - task: PublishTestResults@2
