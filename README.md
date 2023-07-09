@@ -14,20 +14,21 @@ The pipeline is defined in `pipeline.yml` and is executed in `Azure DevOps` usin
 
 The pipeline has four variables and one variable group `BenchPress` that contains the following variables:
 
-- serviceConnectionName
-- location
-- buildId
-- resourceGroupName
-- BenchPress
-  - AZ_APPLICATION_ID
-  - AZ_ENCRYPTED_PASSWORD
-  - AZ_TENANT_ID
-  - AZ_SUBSCRIPTION_ID
-  - AZ_SP_HAWAII_APP_ID
+- _serviceConnectionName_: Name of the `Azure Service Connection` to use to connect to Azure.
+- _location_: Location to deploy the infrastructure to.
+- _buildId_: Build id of the pipeline.
+- _resourceGroupName_: Name of the resource group to create and deploy the infrastructure to.
+- _BenchPress_: Variable group that contains the following variables
+  - _AZ_APPLICATION_ID_: Application id of the service principal to use to connect to Azure.
+  - _AZ_ENCRYPTED_PASSWORD_: Encrypted password of the service principal to use to connect to Azure.
+  - _AZ_TENANT_ID_: Tenant id of the service principal to use to connect to Azure.
+  - _AZ_SUBSCRIPTION_ID_: Subscription id of the service principal to use to connect to Azure.
 
 The pipeline consists of 3 steps:
 
-- Setup
+- _Setup_
+
+In this step, following script ensures that `Az`, `Az.App`, `Az.Portal`, `Pester` and `BenchPress.Azure` modules are installed from _Powershell Gallery_, and ensures `bicep` tool is installed and upgraded to the latest version.
 
 ```powershell
 az bicep install
@@ -40,7 +41,9 @@ Install-Module -Name Pester -Force
 Install-Module -Name BenchPress.Azure -Force
 ```
 
-- Deploy Resource Group
+- _Deploy Resource Group_
+
+In this step, _Resource Group_ is created and all the modules (_except the folder name starts with underscore_) are deployed to the resource group.
 
 ```powershell
 Write-Host "Creating resource group: $(resourceGroupName)"
@@ -56,7 +59,7 @@ foreach ($module in Get-ChildItem -Path "./bicep/modules" -Directory | Where-Obj
 }
 ```
 
-- Run e2e tests
+- _Run e2e tests_
 
 ```powershell
 Invoke-Pester -OutputFile test.xml -OutputFormat NUnitXML
