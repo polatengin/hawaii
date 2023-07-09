@@ -58,7 +58,7 @@ jobs:
       scriptLocation: "inlineScript"
       workingDirectory: "$(Build.SourcesDirectory)/bicep/tests"
       inlineScript: |
-        Invoke-Pester -OutputFile test.xml -OutputFormat NUnitXML
+        Invoke-Pester -OutputFile output.xml -OutputFormat NUnitXML
 
   - task: PublishTestResults@2
     displayName: "Publish test results"
