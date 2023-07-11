@@ -67,7 +67,7 @@ In this step, Pester tests are executed to test the deployment of the infrastruc
 Invoke-Pester -OutputFile output.xml -OutputFormat NUnitXML
 ```
 
-- Publish test results
+- _Publish test results_
 
 In this step, test results are published to `Azure DevOps` using `PublishTestResults@2` task.
 
@@ -82,4 +82,79 @@ In this step, test results are published to `Azure DevOps` using `PublishTestRes
     testRunTitle: "Test Results"
     publishRunAttachments: true
     mergeTestResults: true
+```
+
+### Bicep Modules
+
+The infrastructure is defined in `bicep/modules` folder, and consists of following modules;
+
+- ActionGroup
+- AKSCluster
+- AppInsights
+- AppServicePlan
+- ContainerApp
+- ContainerRegistry
+- CosmosDB
+- Dashboard
+- DataFactory
+- EventHub
+- KeyVault
+- OperationalInsightsWorkspace
+- PostgreSql
+- SQL
+- Storage
+- StreamAnalytics
+- Synapse
+- VirtualMachine
+- WebApp
+
+Each module has a bicep file `main.bicep` and a parameters file `parameters.bicepparam` that contains the parameters for the module.
+
+### BenchPress Tests
+
+The tests are defined in `bicep/tests` folder, and consists of following tests;
+
+- ActionGroup.Tests.ps1
+- AKSCluster.Tests.ps1
+- AppInsights.Tests.ps1
+- AppServicePlan.Tests.ps1
+- ContainerApp.Tests.ps1
+- ContainerRegistry.Tests.ps1
+- CosmosDB.Tests.ps1
+- Dashboard.Tests.ps1
+- DataFactory.Tests.ps1
+- EventHub.Tests.ps1
+- KeyVault.Tests.ps1
+- OperationalInsightsWorkspace.Tests.ps1
+- PostgreSql.Tests.ps1
+- ResourceGroup.Tests.ps1
+- SQL.Tests.ps1
+- Storage.Tests.ps1
+- StreamAnalytics.Tests.ps1
+- Synapse.Tests.ps1
+- VirtualMachine.Tests.ps1
+- WebApp.Tests.ps1
+
+Each test file has a `BeforeAll` block that contains the setup code.
+
+```powershell
+Import-Module BenchPress.Azure
+
+# arrange
+$rgName = "rg-hawaii-${env:buildId}"
+$location = "${env:location}"
+
+# log
+Write-Host "Running Tests for {rgName: $rgName}, {location: $location}"
+```
+
+Each test file contains one or more tests, and each test is defined as a `Describe` block.
+
+```powershell
+Describe "Test description" {
+  It "Test name" {
+    # Test code, such as;
+    Confirm-AzBPResourceGroup -ResourceGroupName $rgName | Should -BeSuccessful
+  }
+}
 ```
