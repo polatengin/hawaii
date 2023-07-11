@@ -159,16 +159,24 @@ Describe "Test description" {
 }
 ```
 
+## Pipeline Execution
+
+The pipeline can be run by clicking the `Run pipeline` button on the top right corner of the pipeline page.
+
 ![image](https://github.com/polatengin/hawaii/assets/118744/f061ffe7-22b1-4473-8592-6810ddf74057)
 
-![image](https://github.com/polatengin/hawaii/assets/118744/ed81d853-d52b-4de4-9b43-adf7c3a9b3d4)
-
-![image](https://github.com/polatengin/hawaii/assets/118744/ce6d088f-c68f-44db-941b-1aa7b8d924da)
+`Deploy and Test Bicep Modules` job will be executed, and the output of the tests will be published to `Azure DevOps`. Steps of the pipeline can be viewed by clicking the name of the job on the pipeline page.
 
 ![image](https://github.com/polatengin/hawaii/assets/118744/c92a1c1e-aab0-48ea-b1ed-55015e246650)
 
+Output logs of the `Run e2e tests` step can be viewed by clicking the step on the pipeline page.
+
 ![image](https://github.com/polatengin/hawaii/assets/118744/2f461f46-0d19-4762-9c06-538a42ca847f)
 
+All the logs and the output of the tests can be viewed on the page.
+
 ![image](https://github.com/polatengin/hawaii/assets/118744/0cf518b4-73bc-4982-8329-6b2962419734)
+
+The output of the tests can be viewed by clicking the `Tests` tab on the pipeline page.
 
 ![image](https://github.com/polatengin/hawaii/assets/118744/524432f5-cc18-422c-8191-3ed4cdb8ea03)
