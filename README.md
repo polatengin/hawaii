@@ -24,7 +24,7 @@ The pipeline has four variables and one variable group `BenchPress` that contain
   - _AZ_TENANT_ID_: Tenant id of the service principal to use to connect to Azure.
   - _AZ_SUBSCRIPTION_ID_: Subscription id of the service principal to use to connect to Azure.
 
-The pipeline consists of 3 steps:
+The pipeline consists of four steps:
 
 - _Setup_
 
