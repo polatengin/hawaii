@@ -16,6 +16,33 @@
 }
 
 Describe "Cosmos DB Gremlin Database" {
+  It "Should contain a Gremlin Cosmos DB Account named $gremlinAccountName - Confirm-AzBPResource" {
+    # arrange
+    $params = @{
+      ResourceType      = "CosmosDBAccount"
+      ResourceName      = $gremlinAccountName
+      ResourceGroupName = $rgName
+    }
+
+    # act and assert
+    Confirm-AzBPResource @params | Should -BeSuccessful
+  }
+
+  It "Should contain a Gremlin Cosmos DB Account named $gremlinAccountName that is a Global Document DB -
+  Confirm-AzBPResource" {
+    # arrange
+    $params = @{
+      ResourceType      = "CosmosDBAccount"
+      ResourceName      = $gremlinAccountName
+      ResourceGroupName = $rgName
+      PropertyKey       = "Kind"
+      PropertyValue     = "GlobalDocumentDB"
+    }
+
+    # act and assert
+    Confirm-AzBPResource @params | Should -BeSuccessful
+  }
+
   It "Should contain the Cosmos DB Account" {
     # act
     $result = Confirm-AzBPCosmosDBAccount -ResourceGroupName $rgName -Name $gremlinAccountName
@@ -46,6 +73,34 @@ Describe "Cosmos DB Gremlin Database" {
 
     # assert
     $result.ResourceDetails.PublicNetworkAccess | Should -Be "Enabled"
+  }
+
+  It "Should contain a Gremlin Cosmos DB named $gremlinDatabaseName - Confirm-AzBPResource" {
+    # arrange
+    $params = @{
+      ResourceType      = "CosmosDBGremlinDatabase"
+      ResourceName      = $gremlinDatabaseName
+      ResourceGroupName = $rgName
+      AccountName       = $gremlinAccountName
+    }
+
+    # act and assert
+    Confirm-AzBPResource @params | Should -BeSuccessful
+  }
+
+  It "Should contain a Gremlin Cosmos DB named $gremlinDatabaseName - Confirm-AzBPResource" {
+    # arrange
+    $params = @{
+      ResourceType      = "CosmosDBGremlinDatabase"
+      ResourceName      = $gremlinDatabaseName
+      ResourceGroupName = $rgName
+      AccountName       = $gremlinAccountName
+      PropertyKey       = "Name"
+      PropertyValue     = $gremlinDatabaseName
+    }
+
+    # act and assert
+    Confirm-AzBPResource @params | Should -BeSuccessful
   }
 }
 

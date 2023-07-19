@@ -12,6 +12,32 @@
 }
 
 Describe "Verify Container Application" {
+  It "Should contain a Container Application named $containerAppName - Confirm-AzBPResource" {
+    # arrange
+    $params = @{
+      ResourceType      = "ContainerApp"
+      ResourceName      = $containerAppName
+      ResourceGroupName = $rgName
+    }
+
+    # act and assert
+    Confirm-AzBPResource @params | Should -BeSuccessful
+  }
+
+  It "Should contain a Container Application with an Ingress Port of 80 - Confirm-AzBPResource" {
+    # arrange
+    $params = @{
+      ResourceType      = "ContainerApp"
+      ResourceName      = $containerAppName
+      ResourceGroupName = $rgName
+      PropertyKey       = "IngressTargetPort"
+      PropertyValue     = 80
+    }
+
+    # act and assert
+    Confirm-AzBPResource @params | Should -BeSuccessful
+  }
+
   It "Should contain the Container Application" {
     # act
     $result = Confirm-AzBPContainerApp -ResourceGroupName $rgName -Name $containerAppName
@@ -38,6 +64,33 @@ Describe "Verify Container Application" {
 }
 
 Describe "Verify Container Application Managed Environment" {
+  It "Should contain a Container Application Managed Environment named $managedEnvName - Confirm-AzBPResource" {
+    # arrange
+    $params = @{
+      ResourceType      = "ContainerAppManagedEnv"
+      ResourceName      = $managedEnvName
+      ResourceGroupName = $rgName
+    }
+
+    # act and assert
+    Confirm-AzBPResource @params | Should -BeSuccessful
+  }
+
+  It "Should contain a Container Application Managed Environment named $managedEnvName -
+    Confirm-AzBPResource" {
+    # arrange
+    $params = @{
+      ResourceType      = "ContainerAppManagedEnv"
+      ResourceName      = $managedEnvName
+      ResourceGroupName = $rgName
+      PropertyKey       = "Name"
+      PropertyValue     = $managedEnvName
+    }
+
+    # act and assert
+    Confirm-AzBPResource @params | Should -BeSuccessful
+  }
+
   It "Should contain the Container Application" {
     # act
     $result = Confirm-AzBPContainerAppManagedEnv -ResourceGroupName $rgName -Name $managedEnvName

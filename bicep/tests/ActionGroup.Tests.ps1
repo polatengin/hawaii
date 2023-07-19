@@ -12,6 +12,32 @@
 }
 
 Describe "Verify Action Group" {
+  It "Should contain an Action Group named $actionGroupName - Confirm-AzBPResource" {
+    # arrange
+    $params = @{
+      ResourceType      = 'ActionGroup'
+      ResourceName      = $actionGroupName
+      ResourceGroupName = $rgName
+    }
+  
+    # act and assert
+    Confirm-AzBPResource @params | Should -BeSuccessful
+  }
+  
+  It "Should contain an Action Group named $actionGroupName - Confirm-AzBPResource" {
+    # arrange
+    $params = @{
+      ResourceType      = 'ActionGroup'
+      ResourceName      = $actionGroupName
+      ResourceGroupName = $rgName
+      PropertyKey       = "GroupShortName"
+      PropertyValue     = $actionGroupName
+    }
+  
+    # act and assert
+    Confirm-AzBPResource @params | Should -BeSuccessful
+  }
+
   It "Should contain the Action Group" {
     # act
     $result = Confirm-AzBPActionGroup -ResourceGroupName $rgName -ActionGroupName $actionGroupName
