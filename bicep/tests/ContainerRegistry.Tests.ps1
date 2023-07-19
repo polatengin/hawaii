@@ -11,6 +11,32 @@
 }
 
 Describe "Verify Container Registry" {
+  It "Should contain a Container Registry named $acrName - Confirm-AzBPResource" {
+    # arrange
+    $params = @{
+      ResourceType      = "ContainerRegistry"
+      ResourceName      = $acrName
+      ResourceGroupName = $rgName
+    }
+
+    # act and assert
+    Confirm-AzBPResource @params | Should -BeSuccessful
+  }
+
+  It "Should contain a Container Registry named $acrName with a Standard SKU - Confirm-AzBPResource" {
+    # arrange
+    $params = @{
+      ResourceType      = "ContainerRegistry"
+      ResourceName      = $acrName
+      ResourceGroupName = $rgName
+      PropertyKey       = "SkuName"
+      PropertyValue     = "Basic"
+    }
+
+    # act and assert
+    Confirm-AzBPResource @params | Should -BeSuccessful
+  }
+
   It "Should contain the Container Registry" {
     # act
     $result = Confirm-AzBPContainerRegistry -ResourceGroupName $rgName -Name $acrName

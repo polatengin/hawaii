@@ -11,6 +11,32 @@
 }
 
 Describe "Verify App Service Plan" {
+  It "Should contain an App Service Plan named $appServicePlanName - Confirm-AzBPResource" {
+    # arrange
+    $params = @{
+      ResourceType      = "Appserviceplan"
+      ResourceName      = $appServicePlanName
+      ResourceGroupName = $rgName
+    }
+
+    # act and assert
+    Confirm-AzBPResource @params | Should -BeSuccessful
+  }
+
+  It "Should contain an App Service Plan named $appServicePlanName with a Free SKU - Confirm-AzBPResource" {
+    # arrange
+    $params = @{
+      ResourceType      = "Appserviceplan"
+      ResourceName      = $appServicePlanName
+      ResourceGroupName = $rgName
+      PropertyKey       = "Sku.Tier"
+      PropertyValue     = "Free"
+    }
+
+    # act and assert
+    Confirm-AzBPResource @params | Should -BeSuccessful
+  }
+
   It "Should contain the App Service Plan" {
     # act
     $result = Confirm-AzBPAppServicePlan -ResourceGroupName $rgName -AppServicePlanName $appServicePlanName

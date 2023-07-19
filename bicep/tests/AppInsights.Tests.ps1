@@ -12,6 +12,33 @@
 }
 
 Describe "Verify Application Insights" {
+  It "Should contain an Application Insights named $appInsightsName - Confirm-AzBPResource" {
+    # arrange
+    $params = @{
+      ResourceType      = "AppInsights"
+      ResourceName      = $appInsightsName
+      ResourceGroupName = $rgName
+    }
+
+    # act and assert
+    Confirm-AzBPResource @params | Should -BeSuccessful
+  }
+
+  It "Should contain an Application Insights named $appInsightsName with Application Type of web -
+  Confirm-AzBPResource" {
+    # arrange
+    $params = @{
+      ResourceType      = "AppInsights"
+      ResourceName      = $appInsightsName
+      ResourceGroupName = $rgName
+      PropertyKey       = "ApplicationType"
+      PropertyValue     = "web"
+    }
+
+    # act and assert
+    Confirm-AzBPResource @params | Should -BeSuccessful
+  }
+
   It "Should contain the Application Insights" {
     # act
     $result = Confirm-AzBPAppInsights -ResourceGroupName $rgName -Name $appInsightsName
