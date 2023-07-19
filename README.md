@@ -2,6 +2,12 @@
 
 Sample `Azure DevOps Pipeline` that deploys infrastructure to `Azure` using `Bicep`, and test the deployment using `BenchPress`
 
+## Infrastructure Testing
+
+In the context of project development, usually process starts by creating the infrastructure in code. Once the infrastructure has been defined in code, it's crucial to test any changes we want to make. This testing is essential to ensure that the changes meet the project's and company's standards in terms of reliability, security, compliance, and configuration.
+
+`BenchPress` is a test framework that allows you to test your infrastructure deployments. It's a _PowerShell_ module that allows you to write tests in _PowerShell_ and run them against your infrastructure deployments.
+
 ## Components
 
 - `Azure DevOps Pipeline` - Orchestrator to deploy infrastructure to Azure
